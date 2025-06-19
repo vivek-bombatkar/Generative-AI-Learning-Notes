@@ -42,7 +42,127 @@ When the documents index is prepared, you are ready to ask the questions. The fo
    - Plan for field-level access control and fine-grained relevance tuning  
 
 
-
+## OpenSearch through queries:
+```
+PUT /10-k
+{
+  "settings": {
+    "index.knn": true,
+    "index.knn.algo_param.ef_search": 512,
+    "number_of_shards": 5,
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "type": "standard",
+          "stopwords": "_english_"
+        },
+        "content_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "stop",
+            "snowball"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "file_name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "chunk_id": {
+        "type": "long"
+      },
+      "content_text": {
+        "type": "text",
+        "analyzer": "content_analyzer",
+        "norms": true,
+        "index_options": "positions"
+      },
+      "content_vector_titan_v1": {
+        "type": "knn_vector",
+        "dimension": 1536,
+        "method": {
+          "name": "hnsw",
+          "space_type": "l2",
+          "engine": "nmslib",
+          "parameters": {
+            "ef_construction": 256,
+            "m": 16
+          }
+        }
+      },
+      "content_vector_titan_v2:0": {
+        "type": "knn_vector",
+        "dimension": 1024,
+        "method": {
+          "name": "hnsw",
+          "space_type": "l2",
+          "engine": "nmslib",
+          "parameters": {
+            "ef_construction": 256,
+            "m": 16
+          }
+        }
+      }
+    },
+    "dynamic_templates": [
+      {
+        "strings_id_suffix": {
+          "match_pattern": "regex",
+          "path_match": "metadata_fields.*",
+          "match": ".*_id$",
+          "mapping": {
+            "type": "keyword",
+            "ignore_above": 128
+          }
+        }
+      },
+      {
+        "strings_s_suffix": {
+          "match_pattern": "regex",
+          "path_match": "metadata_fields.*",
+          "match": ".*_s$",
+          "mapping": {
+            "type": "text"
+          }
+        }
+      },
+      {
+        "strings_t_suffix": {
+          "match_pattern": "regex",
+          "path_match": "metadata_fields.*",
+          "match": ".*_t$",
+          "mapping": {
+            "type": "date",
+            "format": "MMM dd yyyy hh:mm:ss a || MMM dd yyyy HH:mm:ss"
+          }
+        }
+      },
+      {
+        "strings_d_suffix": {
+          "match_pattern": "regex",
+          "path_match": "metadata_fields.*",
+          "match": ".*_d$",
+          "mapping": {
+            "type": "date",
+            "format": "MMM dd yyyy || yyyy/MM/dd"
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 | **Code Section**              | **Description** |
 |------------------------------|------------------|
@@ -51,8 +171,28 @@ When the documents index is prepared, you are ready to ask the questions. The fo
 | **Dynamic Templates**        | - Automatically maps fields in `metadata_fields` based on their suffix: <br> - `*_id`: Mapped as keyword (for exact search). <br> - `*_s`: Mapped as text (for full-text search). <br> - `*_t`: Mapped as date with timestamp format. <br> - `*_d`: Mapped as date with simpler date format. This allows flexibility in storing and querying structured metadata. |
 
 
+# Chunking
+```
+from langchain.text_splitter import TokenTextSplitter
 
+chunk_size = 200
+chunk_overlap = 100
 
+def token_chunking(content):
+    logger.info("Splitting document into chunks")
+    text_splitter = TokenTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    chunks = text_splitter.split_text(content)
+    return chunks
+```
+Chunking strategies are important techniques for breaking down large amounts of text or data into smaller, more manageable pieces. The choice of strategy often depends on the specific requirements of the application, the nature of the text data, and the downstream tasks to be performed. Here are some examples of chunking strategies:
+
+| **Attribute**              | **Fixed-Size Chunking**                                      | **Sentence-Based Chunking**                                  | **Token-Based Chunking**                                      |
+|---------------------------|---------------------------------------------------------------|---------------------------------------------------------------|----------------------------------------------------------------|
+| **Splitting Method**      | By character count (e.g., 1000 chars)                         | At sentence boundaries                                        | After fixed number of tokens (words or subwords)              |
+| **Ease of Implementation**| Very simple                                                   | Requires sentence segmentation logic                          | Requires tokenization using NLP libraries                     |
+| **Chunk Size Consistency**| High (uniform chunk sizes)                                    | Variable (depends on sentence length)                         | Moderate to high (more semantically stable than char-based)   |
+| **Semantic Preservation** | Low to Moderate                                               | High                                                          | High                                                           |
+| **Best For**              | Quick prototyping, fixed-size models                         | Language tasks, summarization, QA                             | Embedding generation, semantic search                         |
 
 
 
