@@ -194,6 +194,122 @@ Chunking strategies are important techniques for breaking down large amounts of 
 | **Semantic Preservation** | Low to Moderate                                               | High                                                          | High                                                           |
 | **Best For**              | Quick prototyping, fixed-size models                         | Language tasks, summarization, QA                             | Embedding generation, semantic search                         |
 
+# Embedding Vectors
+For the embedding process we decided to use third-party models from HuggingFace, to demonstrate how to connect external endpoints into OpenSearch, and we will dive deep into that in the next sections.
+
+```
+embedding_endpoint_dictionary = {
+    'amazon.titan-embed-text-v1':"amazon.titan-embed-text-v1",
+    'amazon.titan-embed-text-v2:0':  "amazon.titan-embed-text-v2:0"
+}
+
+def get_embedding(chunk_list):
+    result = []
+    for chunk in chunk_list:
+        result.append({
+            'content': chunk
+        })
+    for model_id, endpoint_name in embedding_endpoint_dictionary.items():
+        for i in range(0, len(chunk_list), max_batch):
+            try:
+                batch = chunk_list[i:i + max_batch]
+            except:
+                batch = chunk_list[i:]
+
+            for text in batch:
+                data = [text]
+                json_data = json.dumps(data)
+
+                try:
+                    response = sagemaker_runtime_client.invoke_endpoint(
+                        EndpointName=endpoint_name,
+                        ContentType=content_type,
+                        Body=json_data,
+                    )
+
+                    if response["ResponseMetadata"]["HTTPStatusCode"] != 200:
+                        logger.error(f"Error invoking endpoint {endpoint_name}: {response}")
+                        raise Exception(f"Error invoking endpoint {endpoint_name}")
+
+                    embeddings = json.loads(response["Body"].read().decode("utf-8"))
+                    result[i + batch.index(text)][model_id] = embeddings
+                except Exception as e:
+                    logger.info(f"Error invoking endpoint {endpoint_name}: {e}")
+                    raise
+
+    return result
+```
+
+# Upload documents into OpenSearch
+After chunking and embedding the documents, the next step is to upload them to OpenSearch. This process requires formatting the data to match the structure of the OpenSearch index.
+
+By carefully aligning the uploaded data with the OpenSearch index structure, we ensure optimal performance in data retrieval and querying operations. This structured approach forms the foundation for building powerful search and analytics capabilities on top of the uploaded data.
+
+```
+def index_document(index_name, embeddings, object_key, metadata=None):
+    file_name = object_key.split('/')[-1]
+    file_base_name = file_name.split('.')[0]
+    clean_file_base_name = file_base_name.replace('content', '')
+    logger.info(f"Indexing content and vector-embedding into OpenSearch index {index_name} for file {file_name}")
+    print("LEN CHUNKS in index_document ", len(embeddings))
+    documents = []
+    
+    # Create a document for each chunk of content and vector-embedding
+    for i, embeddings_dictionary in enumerate(embeddings):
+        document = {
+            '_op_type': 'index',
+            'file_name': clean_file_base_name,
+            'chunk_id': i,
+            'content_text': embeddings_dictionary['content'],
+        }
+        for model_id, endpoint_name in embedding_endpoint_dictionary.items():
+            vector_embedding = embeddings_dictionary[model_id][0]
+            document[f'content_vector_{"_".join(model_id.split("/")[-1].split("-")[:2])}'] = vector_embedding
+
+
+        # Process and add metadata fields to the document
+        if metadata and "fields" in metadata:
+            metadata_fields = {}
+            for field in metadata["fields"]:
+                if 'name' in field:
+                    if 'value' in field:
+                        metadata_fields[field['name']] = field['value']
+                    elif 'values' in field:  
+                        metadata_fields[field['name']] = field['values']
+                    else:
+                        logger.warning(f"Field missing 'value' or 'values': {field}")
+                else:
+                    logger.warning(f"Field missing 'name': {field}")
+
+            document['metadata_fields'] = metadata_fields
+        
+        # Add the document to the list of documents to be indexed
+        documents.append(document)
+
+    logger.info(f"Complete document to be indexed: {len(documents)}")
+
+    try:
+        logger.info(f"Indexing document into OpenSearch index {index_name}")
+        
+        # Bulk index the documents into the OpenSearch index
+        success, failed = bulk(opensearch, documents, index=index_name)
+        logger.info(f'Indexed {success} documents successfully.')
+        logger.info(f'Indexed {failed} documents failed.')
+    except Exception as e:
+        logger.error(f"Error indexing document: {e}")
+```
+
+# Performing Basic Search Queries in Open Search
+
+
+| **Query Type**             | **Objective**                                                                                           | **Query Code (Elasticsearch DSL)**                                                                                                                                                                                                                                                                                                                                                                                                                         | **Guidance**                                                                                                                                                             |
+|----------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Simple Text Search**  | Retrieve documents containing a specific phrase.                                                        | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "match": {<br>      "content_text": {<br>        "query": "3M revenue contribution from Asia-Pacific 2023"<br>      }<br>    }<br>  }<br>}```                                                                                                     | Searches for a specific phrase in `content_text`. Vector and metadata fields are excluded.                                         |
+| **2. Fuzzy Search**        | Search for approximate matches, useful for handling typos.                                              | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "fuzzy": {<br>      "content_text": {<br>        "value": "aparel",<br>        "fuzziness": "AUTO"<br>      }<br>    }<br>  }<br>}```                                                                                                  | Finds near-matches for `"aparel"` using fuzzy logic. Useful for typo handling.                                                    |
+| **3. Match Phrase Query**  | Find documents with an exact phrase for high relevance.                                                 | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "bool": {<br>      "must": [<br>        {<br>          "match": {<br>            "content_text": "This brand includes a wide assortment of baby and toddler apparel"<br>          }<br>        }<br>      ]<br>    }<br>  }<br>}``` | Matches exact long-form phrases in the content field. Uses `bool` with `must` clause.                                              |
+| **4. Boost Query Search**  | Prioritize certain fields over others for fine-tuned relevance.                                         | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "bool": {<br>      "must": [<br>        {<br>          "match": {<br>            "metadata_fields.exchange_id": {<br>              "query": "NYSE",<br>              "boost": 3<br>            }<br>          }<br>        },<br>        {<br>          "range": {<br>            "metadata_fields.document_period_end_date_d": {<br>              "gte": "Dec 01 2021",<br>              "lte": "Dec 31 2023"<br>            }<br>          }<br>        },<br>        {<br>          "match": {<br>            "content_text": {<br>              "query": "financial statements",<br>              "boost": 1<br>            }<br>          }<br>        }<br>      ]<br>    }<br>  }<br>}``` | Boosts `"exchange_id"` match over others. Filters by date range and text relevance.                                                |
+| **5. Metadata Search**     | Target specific metadata fields, essential for filtering by document type and date range.              | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "bool": {<br>      "must": [<br>        {<br>          "match": {<br>            "metadata_fields.form_type_s": "10-K"<br>          }<br>        },<br>        {<br>          "range": {<br>            "metadata_fields.filed_as_of_date_d": {<br>              "gte": "Dec 01 2021",<br>              "lte": "Aug 31 2024"<br>            }<br>          }<br>        }<br>      ]<br>    }<br>  }<br>}``` | Filters by `"form_type_s": "10-K"` and date between Dec 2021 and Aug 2024. Enables precise metadata-level filtering.                |
+
 
 
 # Resources
