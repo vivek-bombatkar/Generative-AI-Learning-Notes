@@ -311,172 +311,78 @@ def index_document(index_name, embeddings, object_key, metadata=None):
 | **5. Metadata Search**     | Target specific metadata fields, essential for filtering by document type and date range.              | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "bool": {<br>      "must": [<br>        {<br>          "match": {<br>            "metadata_fields.form_type_s": "10-K"<br>          }<br>        },<br>        {<br>          "range": {<br>            "metadata_fields.filed_as_of_date_d": {<br>              "gte": "Dec 01 2021",<br>              "lte": "Aug 31 2024"<br>            }<br>          }<br>        }<br>      ]<br>    }<br>  }<br>}``` | Filters by `"form_type_s": "10-K"` and date between Dec 2021 and Aug 2024. Enables precise metadata-level filtering.                |
 
 
-<table border="1" cellspacing="0" cellpadding="6">
-  <thead>
-    <tr>
-      <th>Query Type</th>
-      <th>Objective</th>
-      <th>Query Code (Elasticsearch DSL)</th>
-      <th>Guidance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>1. Simple Text Search</b></td>
-      <td>Retrieve documents containing a specific phrase.</td>
-      <td>
-        <pre>
-GET /10-k/_search
-{
-  "_source": {
-    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
-  },
-  "query": {
-    "match": {
-      "content_text": {
-        "query": "3M revenue contribution from Asia-Pacific 2023"
-      }
-    }
-  }
-}
-        </pre>
-      </td>
-      <td>Searches for a specific phrase in <code>content_text</code>. Vector and metadata fields are excluded.</td>
-    </tr>
+# Text to Vector Conversion
+In vector search, text data needs to be transformed into a format that machines can understand and compare—this is where embeddings come in. Embeddings are dense vector representations of text, where similar pieces of text are positioned closer together in vector space. This transformation allows for semantic searching, where the system can retrieve documents not just based on keyword matching, but on the meaning of the text itself. By generating embeddings for text, we create the foundation for advanced search capabilities that can handle nuanced queries, improving the accuracy and relevance of search results.
 
-    <tr>
-      <td><b>2. Fuzzy Search</b></td>
-      <td>Search for approximate matches, useful for handling typos.</td>
-      <td>
-        <pre>
-GET /10-k/_search
+- This query sends the sentence "today is sunny" to a model to generate its vector embedding.
+- The return_number option indicates that numerical values of the embeddings should be returned.
+- The target_response specifies the embedding type to return (in this case, sentence_embedding).
+```
+POST /_plugins/_ml/_predict/text_embedding/{YOUR_MODEL_ID} #Please substitute for either one of your model id's.
 {
-  "_source": {
-    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
-  },
-  "query": {
-    "fuzzy": {
-      "content_text": {
-        "value": "aparel",
-        "fuzziness": "AUTO"
-      }
-    }
-  }
+  "text_docs": ["today is sunny"],
+  "return_number": true,
+  "target_response": ["sentence_embedding"]
 }
-        </pre>
-      </td>
-      <td>Finds near-matches for <code>"aparel"</code> using fuzzy logic. Useful for typo handling.</td>
-    </tr>
+```
 
-    <tr>
-      <td><b>3. Match Phrase Query</b></td>
-      <td>Find documents with an exact phrase for high relevance.</td>
-      <td>
-        <pre>
-GET /10-k/_search
-{
-  "_source": {
-    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
-  },
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "match": {
-            "content_text": "This brand includes a wide assortment of baby and toddler apparel"
-          }
-        }
-      ]
-    }
-  }
-}
-        </pre>
-      </td>
-      <td>Matches exact long-form phrases in the content field using <code>bool</code> and <code>must</code>.</td>
-    </tr>
+# enrich queries with neural models, enhancing search accuracy.
+In vector search, consistency and efficiency are key. A Neural Query Enrichment Pipeline automates the process of enriching search queries with pre-configured neural models, ensuring that every search benefits from sophisticated machine learning enhancements without needing manual configuration each time. This setup allows for faster, more reliable, and more accurate searches by automatically applying the best-suited models to different content fields. It also simplifies the process for developers and users by standardizing the search experience across different datasets or indices.
 
-    <tr>
-      <td><b>4. Boost Query Search</b></td>
-      <td>Prioritize certain fields over others for fine-tuned relevance.</td>
-      <td>
-        <pre>
-GET /10-k/_search
-{
-  "_source": {
-    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
-  },
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "match": {
-            "metadata_fields.exchange_id": {
-              "query": "NYSE",
-              "boost": 3
-            }
-          }
-        },
-        {
-          "range": {
-            "metadata_fields.document_period_end_date_d": {
-              "gte": "Dec 01 2021",
-              "lte": "Dec 31 2023"
-            }
-          }
-        },
-        {
-          "match": {
-            "content_text": {
-              "query": "financial statements",
-              "boost": 1
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-        </pre>
-      </td>
-      <td>Boosts match on <code>exchange_id</code>. Adds date range and content-based scoring.</td>
-    </tr>
+| **Query Type**                               | **Objective**                                                                                      | **Guidance**                                                                                                                                                                                |
+|----------------------------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Vector Search (Default Pipeline)**       | Execute a vector search to find semantically similar documents using a single embedding model.     | Searches the `content_vector_titan_v1` field with a query text. Returns top 5 semantically relevant documents. Excludes unnecessary fields for clarity.                                   |
+| **2. Multi-Embeddings Vector Search**         | Use multiple vector fields to conduct a more comprehensive and robust semantic search.             | Combines `content_vector_titan_v1` and `content_vector_titan_v2:0` to ensure the returned results are relevant across different embedding representations.                                |
+| **3. Hybrid Search with Normalization**       | Combine traditional text search with vector search, using normalization techniques to refine output. | Merges a `match` query and a `neural` vector query. Uses L2 normalization and weighted arithmetic mean to balance relevance. Ideal for combining lexical and semantic relevance signals. |
 
-    <tr>
-      <td><b>5. Metadata Search</b></td>
-      <td>Target specific metadata fields, essential for filtering by document type and date range.</td>
-      <td>
-        <pre>
-GET /10-k/_search
-{
-  "_source": {
-    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
-  },
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "match": {
-            "metadata_fields.form_type_s": "10-K"
-          }
-        },
-        {
-          "range": {
-            "metadata_fields.filed_as_of_date_d": {
-              "gte": "Dec 01 2021",
-              "lte": "Aug 31 2024"
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-        </pre>
-      </td>
-      <td>Filters for <code>form_type_s = 10-K</code> and a specific filing date range. Ideal for compliance or historical review.</td>
-    </tr>
-  </tbody>
-</table>
+
+# Reranking with Neural Plugin
+
+
+| **Query Type**                       | **Objective**                                                                                              | **Description**                                                                                                                                                                                                                                   |
+|-------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Lexical Search with Reranking** | Retrieve documents using keyword match, then refine results using a neural reranking model.               | Searches for documents containing the phrase "3M Food Safety Division divestiture impact 2023" using `match`. Results are reranked using an ML model, focusing on `content_text` while excluding vector and metadata fields.                      |
+| **2. Single Vector Search with Reranking** | Use a neural vector search (Titan V1) followed by reranking for more relevant results.                     | Executes a semantic search for a growth-related query using Titan V1 vectors. The top 5 results are reranked by a reranking model to improve the ordering of the most relevant documents from financial reports.                                 |
+| **3. Multi-Vector Search with Reranking** | Combine two neural vector fields (Titan V1 and Titan V2) for a robust search, then rerank results.         | Searches using both vector fields for the query "Carter's U.S. Retail vs Wholesale revenue 2023". Applies reranking on the combined results using an ML model, targeting the most relevant passages from multiple embeddings.                     |
+| **4. Hybrid Search with Reranking** | Mix traditional lexical (`match`) and neural vector (`neural`) queries, then normalize and rerank.         | Combines exact text match with semantic vector search (Titan V1 and V2). Normalizes using L2 and reranks results using weighted arithmetic mean. Ideal for balanced relevance from both lexical and semantic perspectives.                         |
+
+
+| **Feature**                  | **Objective**                                                                                       | **Why It's Important**                                                                                                              | **Description**                                                                                                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Highlight Query Matching** | Emphasize the search term(s) within the content of matched documents.                              | Allows users to quickly see why a document was returned by highlighting the matching text, improving user trust and usability.     | Adds a `"highlight"` section in the search query to wrap matching content fields (e.g., `content_text`) in HTML tags, making matches easy to spot visually.    |
+| **2. OpenSearch Explain**       | Understand how and why a document received its relevance score in a search query.                 | Helps developers, analysts, and users understand ranking logic, enabling better debugging and refinement of queries.                | Adds `?explain=true` to the search request. The response includes detailed scoring breakdowns for each document, including term frequency, field boosts, etc.    |
+
+
+
+| **Security Layer / Component**           | **Purpose**                                                                                             | **Key Details**                                                                                                                                                                                                 |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Networking**                        | Restrict access at the network level                                                                    | Choose between **VPC access** (more secure) and **Public access**. VPC setup can use NGINX Proxy and Security Groups to control inbound access to OpenSearch Dashboards.                                         |
+| **2. Domain Access Policies**            | Allow or deny access to OpenSearch endpoints before reaching the service                                 | Resource-based access policies are evaluated at the edge of the domain (URI-level), controlling whether requests are forwarded to OpenSearch.                                                                 |
+| **3. Fine-Grained Access Control (FGAC)**| Authenticate and authorize users after domain-level access                                               | Includes user authentication, role mapping, and permission evaluation (index, document, and field level). Allows Open Domain Access Policies when FGAC is enabled.                                              |
+| **FGAC: Roles**                          | Assign granular permissions (cluster/index/document/field level)                                         | Roles are different from IAM roles. One user can have multiple roles (e.g., dashboard access, read-only on index1, write on index2).                                                                            |
+| **FGAC: Mapping**                        | Map users to one or more roles                                                                           | Roles are assigned to users to define what parts of the cluster they can access and with what permissions.                                                                                                      |
+| **FGAC: Users**                          | People or apps making requests with credentials                                                          | Users can be IAM-authenticated or use username/password. Master users can create/manage roles, users, and mappings.                                                                                            |
+| **Master User (FGAC Enabled)**           | Full access to OpenSearch cluster and security plugin                                                    | Defined by an IAM ARN or username/password. Mapped to built-in roles: `all_access` (full access) and `security_manager` (manage users/permissions). IAM policies **don’t affect authorization**.                |
+| **Cognito Authentication**               | Enables SSO-like authentication via Amazon Cognito                                                      | Requires setup of **User Pool**, **Identity Pool**, and an IAM role with `AmazonOpenSearchServiceCognitoAccess` policy.                                                                                         |
+| **User Pool**                            | Handles user directory and login                                                                         | Requires domain name and predefined attributes (e.g., name, email). Configurable for password policies and multi-factor auth. Can optionally integrate external identity providers.                              |
+| **Identity Pool**                        | Provides temporary IAM roles post-login                                                                 | Assigns **authenticated** and **unauthenticated** roles to users. Initially enables guest access, but OpenSearch disables it after configuration.                                                              |
+| **IAM Role: CognitoAccessForOpenSearch** | Gives OpenSearch permission to manage Cognito integration                                                | AWS-managed policy (`AmazonOpenSearchServiceCognitoAccess`) provides minimum required permissions for OpenSearch to configure Cognito authentication and link identity/user pools.                              |
+
+
+| **Component**             | **Purpose / Functionality**                                                                                           | **Details**                                                                                                                                                                                                 |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Security Plugin**       | Provides advanced security features like encryption, access control, audit logging, authentication, and multi-tenancy | Core tool used to enforce fine-grained access controls and manage tenants, users, roles, and role mappings                                                                                                  |
+| **Tenants**               | Logical spaces to store Dashboards assets (index patterns, visualizations, dashboards)                                 | - **Global Tenant**: Shared across all users<br>- **Private Tenant**: Exclusive to a user<br>- **Custom Tenant**: Admin-created and role-restricted                                                         |
+| **Creating Tenants**      | Enables isolation for teams or business units                                                                          | Example: `investment_banking` tenant created using Security API to isolate dashboards and visualizations for investment banking users                                                                       |
+| **Creating Roles**        | Define permissions at cluster, index, document, and field levels                                                       | - Access only to `10-k` index<br>- Field-level restriction (e.g., deny `chunk_id`, mask `file_name`)<br>- Tenant-level access to `investment_banking` and `global_tenant` with write permissions              |
+| **Field-Level Security**  | Control visibility of fields within an index                                                                           | - `~chunk_id`: field hidden from user<br>- `file_name`: masked (encrypted/hashed)<br>- Only explicitly listed fields are shown                                                                              |
+| **Role Mapping**          | Connect IAM roles or Cognito groups to OpenSearch roles                                                                | - IAM role `os-dev-limited-opensearch-role` is mapped to the `investment_banking_role`<br>- This mapping ensures Cognito-authenticated users get appropriate permissions                                    |
+| **Master User (via FGAC)**| Super admin that can manage users, roles, and mappings                                                                 | Typically defined via IAM ARN or static credentials; has full access to all features                                                                                                                         |
+| **Access Control Model**  | Multi-layered access enforcement                                                                                        | 1. **Network-level** (VPC, NGINX)<br>2. **Domain-level** (access policy)<br>3. **User-level** (FGAC via security plugin, mapped roles)                                                                       |
+| **Use Case**              | Secure Dashboards for specific teams (e.g., Investment Banking)                                                        | Teams can view and manage only their own data and dashboards, while being restricted from accessing or modifying data belonging to other business units                                                     |
+
+
+
 
 
 # Resources
