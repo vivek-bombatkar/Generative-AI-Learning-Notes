@@ -311,6 +311,173 @@ def index_document(index_name, embeddings, object_key, metadata=None):
 | **5. Metadata Search**     | Target specific metadata fields, essential for filtering by document type and date range.              | ```json<br>GET /10-k/_search<br>{<br>  "_source": {<br>    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]<br>  },<br>  "query": {<br>    "bool": {<br>      "must": [<br>        {<br>          "match": {<br>            "metadata_fields.form_type_s": "10-K"<br>          }<br>        },<br>        {<br>          "range": {<br>            "metadata_fields.filed_as_of_date_d": {<br>              "gte": "Dec 01 2021",<br>              "lte": "Aug 31 2024"<br>            }<br>          }<br>        }<br>      ]<br>    }<br>  }<br>}``` | Filters by `"form_type_s": "10-K"` and date between Dec 2021 and Aug 2024. Enables precise metadata-level filtering.                |
 
 
+<table border="1" cellspacing="0" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Query Type</th>
+      <th>Objective</th>
+      <th>Query Code (Elasticsearch DSL)</th>
+      <th>Guidance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>1. Simple Text Search</b></td>
+      <td>Retrieve documents containing a specific phrase.</td>
+      <td>
+        <pre>
+GET /10-k/_search
+{
+  "_source": {
+    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
+  },
+  "query": {
+    "match": {
+      "content_text": {
+        "query": "3M revenue contribution from Asia-Pacific 2023"
+      }
+    }
+  }
+}
+        </pre>
+      </td>
+      <td>Searches for a specific phrase in <code>content_text</code>. Vector and metadata fields are excluded.</td>
+    </tr>
+
+    <tr>
+      <td><b>2. Fuzzy Search</b></td>
+      <td>Search for approximate matches, useful for handling typos.</td>
+      <td>
+        <pre>
+GET /10-k/_search
+{
+  "_source": {
+    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
+  },
+  "query": {
+    "fuzzy": {
+      "content_text": {
+        "value": "aparel",
+        "fuzziness": "AUTO"
+      }
+    }
+  }
+}
+        </pre>
+      </td>
+      <td>Finds near-matches for <code>"aparel"</code> using fuzzy logic. Useful for typo handling.</td>
+    </tr>
+
+    <tr>
+      <td><b>3. Match Phrase Query</b></td>
+      <td>Find documents with an exact phrase for high relevance.</td>
+      <td>
+        <pre>
+GET /10-k/_search
+{
+  "_source": {
+    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
+  },
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "content_text": "This brand includes a wide assortment of baby and toddler apparel"
+          }
+        }
+      ]
+    }
+  }
+}
+        </pre>
+      </td>
+      <td>Matches exact long-form phrases in the content field using <code>bool</code> and <code>must</code>.</td>
+    </tr>
+
+    <tr>
+      <td><b>4. Boost Query Search</b></td>
+      <td>Prioritize certain fields over others for fine-tuned relevance.</td>
+      <td>
+        <pre>
+GET /10-k/_search
+{
+  "_source": {
+    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
+  },
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "metadata_fields.exchange_id": {
+              "query": "NYSE",
+              "boost": 3
+            }
+          }
+        },
+        {
+          "range": {
+            "metadata_fields.document_period_end_date_d": {
+              "gte": "Dec 01 2021",
+              "lte": "Dec 31 2023"
+            }
+          }
+        },
+        {
+          "match": {
+            "content_text": {
+              "query": "financial statements",
+              "boost": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+        </pre>
+      </td>
+      <td>Boosts match on <code>exchange_id</code>. Adds date range and content-based scoring.</td>
+    </tr>
+
+    <tr>
+      <td><b>5. Metadata Search</b></td>
+      <td>Target specific metadata fields, essential for filtering by document type and date range.</td>
+      <td>
+        <pre>
+GET /10-k/_search
+{
+  "_source": {
+    "excludes": ["content_vector_titan_v1", "content_vector_titan_v2:0", "metadata_fields"]
+  },
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "metadata_fields.form_type_s": "10-K"
+          }
+        },
+        {
+          "range": {
+            "metadata_fields.filed_as_of_date_d": {
+              "gte": "Dec 01 2021",
+              "lte": "Aug 31 2024"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+        </pre>
+      </td>
+      <td>Filters for <code>form_type_s = 10-K</code> and a specific filing date range. Ideal for compliance or historical review.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 # Resources
 - https://github.com/aws-samples/generative-ai-applications-foundational-architecture?tab=readme-ov-file
