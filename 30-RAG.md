@@ -43,126 +43,7 @@ When the documents index is prepared, you are ready to ask the questions. The fo
 
 
 ## OpenSearch through queries:
-```
-PUT /10-k
-{
-  "settings": {
-    "index.knn": true,
-    "index.knn.algo_param.ef_search": 512,
-    "number_of_shards": 5,
-    "analysis": {
-      "analyzer": {
-        "default": {
-          "type": "standard",
-          "stopwords": "_english_"
-        },
-        "content_analyzer": {
-          "type": "custom",
-          "tokenizer": "standard",
-          "filter": [
-            "lowercase",
-            "stop",
-            "snowball"
-          ]
-        }
-      }
-    }
-  },
-  "mappings": {
-    "properties": {
-      "file_name": {
-        "type": "text",
-        "fields": {
-          "keyword": {
-            "type": "keyword",
-            "ignore_above": 256
-          }
-        }
-      },
-      "chunk_id": {
-        "type": "long"
-      },
-      "content_text": {
-        "type": "text",
-        "analyzer": "content_analyzer",
-        "norms": true,
-        "index_options": "positions"
-      },
-      "content_vector_titan_v1": {
-        "type": "knn_vector",
-        "dimension": 1536,
-        "method": {
-          "name": "hnsw",
-          "space_type": "l2",
-          "engine": "nmslib",
-          "parameters": {
-            "ef_construction": 256,
-            "m": 16
-          }
-        }
-      },
-      "content_vector_titan_v2:0": {
-        "type": "knn_vector",
-        "dimension": 1024,
-        "method": {
-          "name": "hnsw",
-          "space_type": "l2",
-          "engine": "nmslib",
-          "parameters": {
-            "ef_construction": 256,
-            "m": 16
-          }
-        }
-      }
-    },
-    "dynamic_templates": [
-      {
-        "strings_id_suffix": {
-          "match_pattern": "regex",
-          "path_match": "metadata_fields.*",
-          "match": ".*_id$",
-          "mapping": {
-            "type": "keyword",
-            "ignore_above": 128
-          }
-        }
-      },
-      {
-        "strings_s_suffix": {
-          "match_pattern": "regex",
-          "path_match": "metadata_fields.*",
-          "match": ".*_s$",
-          "mapping": {
-            "type": "text"
-          }
-        }
-      },
-      {
-        "strings_t_suffix": {
-          "match_pattern": "regex",
-          "path_match": "metadata_fields.*",
-          "match": ".*_t$",
-          "mapping": {
-            "type": "date",
-            "format": "MMM dd yyyy hh:mm:ss a || MMM dd yyyy HH:mm:ss"
-          }
-        }
-      },
-      {
-        "strings_d_suffix": {
-          "match_pattern": "regex",
-          "path_match": "metadata_fields.*",
-          "match": ".*_d$",
-          "mapping": {
-            "type": "date",
-            "format": "MMM dd yyyy || yyyy/MM/dd"
-          }
-        }
-      }
-    ]
-  }
-}
-```
+
 
 | **Code Section**              | **Description** |
 |------------------------------|------------------|
@@ -172,18 +53,7 @@ PUT /10-k
 
 
 # Chunking
-```
-from langchain.text_splitter import TokenTextSplitter
 
-chunk_size = 200
-chunk_overlap = 100
-
-def token_chunking(content):
-    logger.info("Splitting document into chunks")
-    text_splitter = TokenTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    chunks = text_splitter.split_text(content)
-    return chunks
-```
 Chunking strategies are important techniques for breaking down large amounts of text or data into smaller, more manageable pieces. The choice of strategy often depends on the specific requirements of the application, the nature of the text data, and the downstream tasks to be performed. Here are some examples of chunking strategies:
 
 | **Attribute**              | **Fixed-Size Chunking**                                      | **Sentence-Based Chunking**                                  | **Token-Based Chunking**                                      |
@@ -197,107 +67,14 @@ Chunking strategies are important techniques for breaking down large amounts of 
 # Embedding Vectors
 For the embedding process we decided to use third-party models from HuggingFace, to demonstrate how to connect external endpoints into OpenSearch, and we will dive deep into that in the next sections.
 
-```
-embedding_endpoint_dictionary = {
-    'amazon.titan-embed-text-v1':"amazon.titan-embed-text-v1",
-    'amazon.titan-embed-text-v2:0':  "amazon.titan-embed-text-v2:0"
-}
 
-def get_embedding(chunk_list):
-    result = []
-    for chunk in chunk_list:
-        result.append({
-            'content': chunk
-        })
-    for model_id, endpoint_name in embedding_endpoint_dictionary.items():
-        for i in range(0, len(chunk_list), max_batch):
-            try:
-                batch = chunk_list[i:i + max_batch]
-            except:
-                batch = chunk_list[i:]
-
-            for text in batch:
-                data = [text]
-                json_data = json.dumps(data)
-
-                try:
-                    response = sagemaker_runtime_client.invoke_endpoint(
-                        EndpointName=endpoint_name,
-                        ContentType=content_type,
-                        Body=json_data,
-                    )
-
-                    if response["ResponseMetadata"]["HTTPStatusCode"] != 200:
-                        logger.error(f"Error invoking endpoint {endpoint_name}: {response}")
-                        raise Exception(f"Error invoking endpoint {endpoint_name}")
-
-                    embeddings = json.loads(response["Body"].read().decode("utf-8"))
-                    result[i + batch.index(text)][model_id] = embeddings
-                except Exception as e:
-                    logger.info(f"Error invoking endpoint {endpoint_name}: {e}")
-                    raise
-
-    return result
-```
 
 # Upload documents into OpenSearch
 After chunking and embedding the documents, the next step is to upload them to OpenSearch. This process requires formatting the data to match the structure of the OpenSearch index.
 
 By carefully aligning the uploaded data with the OpenSearch index structure, we ensure optimal performance in data retrieval and querying operations. This structured approach forms the foundation for building powerful search and analytics capabilities on top of the uploaded data.
 
-```
-def index_document(index_name, embeddings, object_key, metadata=None):
-    file_name = object_key.split('/')[-1]
-    file_base_name = file_name.split('.')[0]
-    clean_file_base_name = file_base_name.replace('content', '')
-    logger.info(f"Indexing content and vector-embedding into OpenSearch index {index_name} for file {file_name}")
-    print("LEN CHUNKS in index_document ", len(embeddings))
-    documents = []
-    
-    # Create a document for each chunk of content and vector-embedding
-    for i, embeddings_dictionary in enumerate(embeddings):
-        document = {
-            '_op_type': 'index',
-            'file_name': clean_file_base_name,
-            'chunk_id': i,
-            'content_text': embeddings_dictionary['content'],
-        }
-        for model_id, endpoint_name in embedding_endpoint_dictionary.items():
-            vector_embedding = embeddings_dictionary[model_id][0]
-            document[f'content_vector_{"_".join(model_id.split("/")[-1].split("-")[:2])}'] = vector_embedding
 
-
-        # Process and add metadata fields to the document
-        if metadata and "fields" in metadata:
-            metadata_fields = {}
-            for field in metadata["fields"]:
-                if 'name' in field:
-                    if 'value' in field:
-                        metadata_fields[field['name']] = field['value']
-                    elif 'values' in field:  
-                        metadata_fields[field['name']] = field['values']
-                    else:
-                        logger.warning(f"Field missing 'value' or 'values': {field}")
-                else:
-                    logger.warning(f"Field missing 'name': {field}")
-
-            document['metadata_fields'] = metadata_fields
-        
-        # Add the document to the list of documents to be indexed
-        documents.append(document)
-
-    logger.info(f"Complete document to be indexed: {len(documents)}")
-
-    try:
-        logger.info(f"Indexing document into OpenSearch index {index_name}")
-        
-        # Bulk index the documents into the OpenSearch index
-        success, failed = bulk(opensearch, documents, index=index_name)
-        logger.info(f'Indexed {success} documents successfully.')
-        logger.info(f'Indexed {failed} documents failed.')
-    except Exception as e:
-        logger.error(f"Error indexing document: {e}")
-```
 
 # Performing Basic Search Queries in Open Search
 
@@ -317,14 +94,6 @@ In vector search, text data needs to be transformed into a format that machines 
 - This query sends the sentence "today is sunny" to a model to generate its vector embedding.
 - The return_number option indicates that numerical values of the embeddings should be returned.
 - The target_response specifies the embedding type to return (in this case, sentence_embedding).
-```
-POST /_plugins/_ml/_predict/text_embedding/{YOUR_MODEL_ID} #Please substitute for either one of your model id's.
-{
-  "text_docs": ["today is sunny"],
-  "return_number": true,
-  "target_response": ["sentence_embedding"]
-}
-```
 
 # enrich queries with neural models, enhancing search accuracy.
 In vector search, consistency and efficiency are key. A Neural Query Enrichment Pipeline automates the process of enriching search queries with pre-configured neural models, ensuring that every search benefits from sophisticated machine learning enhancements without needing manual configuration each time. This setup allows for faster, more reliable, and more accurate searches by automatically applying the best-suited models to different content fields. It also simplifies the process for developers and users by standardizing the search experience across different datasets or indices.
@@ -382,6 +151,19 @@ In vector search, consistency and efficiency are key. A Neural Query Enrichment 
 | **Use Case**              | Secure Dashboards for specific teams (e.g., Investment Banking)                                                        | Teams can view and manage only their own data and dashboards, while being restricted from accessing or modifying data belonging to other business units                                                     |
 
 
+
+## Evaluating RAG Performance
+- context precision and context recall metrics
+- Faithfulness metric : Faithfulness measures the factual consistency of the generated response against the given context.
+- Answer relevancy metric: The evaluation metric, answer relevancy, focuses on assessing how pertinent the generated answer is to the given prompt.
+- Context recall metric: Context recall measures the extent to which the retrieved context aligns with the annotated answer, treated as the ground truth. It is computed based on the ground truth and the retrieved context.
+- Context precision metric: Context Precision is a metric that evaluates whether all the ground truth relevant items present in the contexts are ranked higher or not.
+
+
+## Chunking strategy
+- Fixed Chunking: The granularity of chunks is important. Anything too large may contain irrelevant information and too small may lack sufficient context.
+- Semantic Chunking: Semantic chunking should be used in scenarios where maintaining the semantic integrity of the text is crucial.
+- Hierarchical chunking: is best suited for complex documents that have a nested or hierarchical structure, such as technical manuals, legal documents, or academic papers with complex formatting and nested tables. 
 
 
 
