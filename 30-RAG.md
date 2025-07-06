@@ -165,6 +165,8 @@ In vector search, consistency and efficiency are key. A Neural Query Enrichment 
 - Semantic Chunking: Semantic chunking should be used in scenarios where maintaining the semantic integrity of the text is crucial.
 - Hierarchical chunking: is best suited for complex documents that have a nested or hierarchical structure, such as technical manuals, legal documents, or academic papers with complex formatting and nested tables. 
 
+## Re-ranking
+- Custom re-ranking is a technique for refining documents retrieved in response to a user query.
 
 
 # Resources
