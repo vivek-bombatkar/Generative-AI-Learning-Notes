@@ -15,6 +15,26 @@
 - Length penalty encourages more concise responses by penalizing longer ones. It sets a soft limit on size.
 - Stop sequences include specific character combinations that signal the model to stop generating tokens when encountered. It is used for the early termination of responses.
 
+## Generative AI Application Architecture Patterns
+### Text summarization pattern For large documents or text
+- map-reduce architecture and apply the concepts of chunking and chaining prompts.  The test summarization architecture for large documents includes the following steps:  
+  1. Split a large document into multiple small number (n) chunks using tools such as LangChain.  
+  2. Send each chunk to the FM to generate a corresponding summary.  
+  3. Append the next chunk to the first summary generated and summarize again.  
+  4. Iterate on each chunk to create a final summarized output.  
+### AI assistant pattern
+- This architecture includes the following steps:
+  1. The user queries the AI assistant.  
+  2. The chat history (if there is any) is passed on to the Amazon Bedrock model along with the user’s current query.  
+  3. The model then generates a response.   
+  4. The model passes the response back to the user.
+### AI assistant use cases
+- 1 Basic AI assistant: This is a zero-shot AI assistant with an FM model.
+- 2 AI assistant using a prompt template: This is an AI assistant with some context provided in the prompt template.
+- 3 AI assistant with a persona: This is an AI assistant with defined roles, such as a career coach with human interactions.
+- 4 Contextual-aware AI assistant: This is an AI assistant that passes context through an external file by generating embeddings.
+
+
 
 
 
