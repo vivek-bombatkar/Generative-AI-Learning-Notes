@@ -3,14 +3,14 @@
 - https://github.com/vivek-bombatkar/generative-ai-for-beginners?tab=readme-ov-file
 
 
-# LLM FM Inference parameters
+# LLM FM Inference parameters - 2 Types
 
 ## 1. Randomness and diversity 
 - Temperature: controls randomness in word choice. Lower values lead to more predictable responses. 
 - Top K limits word choices to the K most probable options. Lower values reduce unusual responses.
 - Top P cuts off low probability word choices based on cumulative probability. It tightens overall response distribution.
 
-## 1. Length
+## 2. Length
 - Response length sets minimum and maximum token counts. It sets a hard limit on response size.
 - Length penalty encourages more concise responses by penalizing longer ones. It sets a soft limit on size.
 - Stop sequences include specific character combinations that signal the model to stop generating tokens when encountered. It is used for the early termination of responses.
