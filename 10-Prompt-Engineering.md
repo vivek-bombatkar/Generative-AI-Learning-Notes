@@ -111,6 +111,138 @@ Prompt engineering is the practice of designing and refining inputs (prompts) to
 
 ---
 
+## Core Definitions (Won’t become outdated)
+
+### Prompt Engineering
+The practice of designing and refining input queries to guide large language models (LLMs) like GPT-4, Claude, or Mistral to produce accurate, useful, or creative outputs.
+
+### Zero-Shot Prompting
+Asking the model to perform a task without giving any examples. The model uses its pre-trained general knowledge.
+
+### Few-Shot Prompting
+Providing a few input-output pairs as examples to help the model understand the task before generating new outputs.
+
+### Chain-of-Thought (CoT) Prompting
+Encouraging the model to reason through intermediate steps before answering, useful for logic-heavy or math tasks.
+
+### Role Prompting
+Assigning a role or persona to the model to influence tone and expertise in its response (e.g., "You are a financial advisor...").
+
+### Output Constraints
+Explicitly defining response limits or structure in your prompt, such as word count, bullet points, or formal tone.
+
+---
+
+## Zero-Shot Prompting
+**Prompt:**  
+> "Summarize the following text in 3 bullet points: [paste text here]"
+
+---
+
+## One-Shot Prompting
+**Prompt:**  
+> "Translate the sentence to Spanish: 'Good morning.'  
+> Now translate: 'How are you?'"
+
+---
+
+## Few-Shot Prompting
+**Prompt:**  
+> "Example 1:  
+> Q: What is the capital of France?  
+> A: Paris  
+>  
+> Example 2:  
+> Q: What is the capital of Germany?  
+> A: Berlin  
+>  
+> Now answer: What is the capital of Italy?"
+
+---
+
+## Chain-of-Thought Prompting
+**Prompt:**  
+> "Let’s solve this step by step:  
+> If a train travels 60 km in 1.5 hours, what is its speed?"
+
+---
+
+## ReAct Prompting
+**Prompt:**  
+> "Reasoning: I need to know the latest stock price of Tesla.  
+> Action: Search[Tesla stock price today]  
+> Observation: $875  
+> Final Answer: Tesla’s stock price is $875."
+
+---
+
+## Role Prompting
+**Prompt:**  
+> "You are a senior UX designer. Give feedback on this mobile app wireframe."
+
+---
+
+## Instruction-Based Prompting
+**Prompt:**  
+> "Explain the concept of overfitting in simple terms for a high school student."
+
+---
+
+## Iterative Prompting
+**Prompt (Round 1):**  
+> "Summarize this article in 3 sentences."
+
+**Prompt (Round 2):**  
+> "Refine the summary to include the main challenge the company faced."
+
+---
+
+## Prompt Chaining
+**Prompt (Step 1):**  
+> "Extract key events from this report."
+
+**Prompt (Step 2):**  
+> "For each event, generate a risk mitigation suggestion."
+
+---
+
+## Prompt Constraints
+**Prompt:**  
+> "Summarize this article in exactly 100 words. Use formal tone."
+
+---
+
+## Prompt Mirroring
+**Prompt:**  
+> "Restate the question in your own words. Then provide your answer:  
+> 'What are effective ways to study large language models?'"
+
+---
+
+## Meta Prompting
+**Prompt:**  
+> "How would you rewrite this prompt to make it clearer and more effective?  
+> Original: 'Make it smart'"
+
+---
+
+## Prompt Ensembling
+**Prompt A:**  
+> "List 5 key use cases of LLMs in healthcare."
+
+**Prompt B:**  
+> "What are LLM applications in medicine?"
+
+**Prompt C:**  
+> "Give examples of LLM usage in hospitals."
+
+**Step:** Compare answers and merge the most relevant parts.
+
+
+
+
+---
+
 
 ## Prompt Engineering techniques commonly used with large language models like GPT-3, GPT-4, and other similar models:
 
