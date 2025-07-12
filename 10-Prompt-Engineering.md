@@ -1,5 +1,115 @@
-# 10 Prompt Engineering
+# 10 Prompt Engineering | Reference Prompts and Stable Definitions
 
+This document provides **reusable prompts** for each major subtopic in Prompt Engineering, with definitions only for concepts unlikely to become outdated. New subtopics are suggested where relevant.
+
+---
+
+## 1. Prompt Engineering (Core Concept)
+
+**Definition**:  
+Prompt engineering is the practice of designing and refining inputs (prompts) to maximize the effectiveness and accuracy of large language model outputs.
+
+**Prompt**:  
+- "Explain what prompt engineering is and why it is important for working with large language models."
+
+---
+
+## 2. Common Prompt Engineering Techniques
+
+**Prompt**:  
+- "List and describe the main prompt engineering techniques used with large language models, such as zero-shot, few-shot, chain-of-thought, instruction-based, reframing, and role-playing."
+
+---
+
+## 3. Prompt Prefixes
+
+**Prompt**:  
+- "Show examples of how prompt prefixes (e.g., 'As a knowledgeable advisor:') can influence the style and quality of LLM responses."
+
+---
+
+## 4. Prompt Decomposition
+
+**Prompt**:  
+- "Explain how breaking down a complex prompt into sub-prompts (prompt decomposition) can improve the clarity and relevance of LLM outputs."
+
+---
+
+## 5. Prompt Reframing
+
+**Prompt**:  
+- "Demonstrate how to reframe a prompt to make it more specific or targeted for a desired outcome."
+
+---
+
+## 6. Prompt Constraints
+
+**Prompt**:  
+- "Provide examples of adding explicit constraints (e.g., word count, formality, cost) to prompts to guide LLM responses."
+
+---
+
+## 7. Prompt Mirroring
+
+**Prompt**:  
+- "Describe prompt mirroring and how asking the model to summarize or rephrase the prompt can help verify its understanding."
+
+---
+
+## 8. ReAct Prompting
+
+**Prompt**:  
+- "Explain the ReAct prompting framework and how it enables LLMs to interleave reasoning traces with actions for more reliable and interactive outputs."
+
+---
+
+## 9. Output Priming
+
+**Prompt**:  
+- "How does output priming, such as providing a partial answer or formatting hint, affect the LLM's output?"
+
+---
+
+## 10. Multi-Turn and Dynamic Prompting
+
+**Prompt**:  
+- "Describe multi-turn and dynamic prompting, and give examples of how prompts can adapt based on previous model responses."
+
+---
+
+## 11. Prompt Chaining
+
+**Prompt**:  
+- "Explain prompt chaining and how breaking a complex task into a sequence of prompts can improve LLM performance."
+
+---
+
+## 12. Temperature Control in Prompting
+
+**Prompt**:  
+- "How does adjusting the temperature parameter in prompting influence the creativity and determinism of LLM responses?"
+
+---
+
+## 13. Suggested New Subtopics
+
+### a. Evaluation of Prompt Effectiveness
+
+**Prompt**:  
+- "What methods can be used to evaluate the effectiveness of different prompts with LLMs?"
+
+### b. Prompt Engineering for Safety and Bias Mitigation
+
+**Prompt**:  
+- "How can prompt engineering be used to minimize bias and improve the safety of LLM outputs?"
+
+---
+
+## 14. General Prompt for Any Prompt Engineering Subtopic
+
+- "Explain [subtopic] in the context of prompt engineering for large language models, including its definition, purpose, and practical examples."
+
+---
 
 
 ## Prompt Engineering techniques commonly used with large language models like GPT-3, GPT-4, and other similar models:
@@ -35,22 +145,9 @@
 | **Template-Based Prompting** | Using predefined templates to structure the input in a way that aligns with the model’s strengths, ensuring more accurate outputs (e.g., pre-defined questions or sentence structures). |
 
 
-## The Prompting / Prompt Engineering
-- Prompt Prefixes: Add a prefix like "As a knowledgeable advisor:" before the prompt to steer the model's response style.
-- Prompt Decomposition: Break down the prompt into sub-prompts like "What are typical extracurricular activities for high school students?" and "What factors should be considered when recommending an activity to a student?"
-- Prompt Reframing: Rephrase the prompt to be more specific, e.g. "Recommend an extracurricular activity suitable for a high school student based on their interests and schedule availability."
-- Prompt Constraints: Add constraints like "Suggest an activity that is low-cost and doesn't require travel" to narrow down the response.
-- Prompt Mirroring: Ask the model to first rephrase or summarize the prompt to check its understanding before providing a suggestion.
-
-
-## ReAct Prompting
-- Generating reasoning traces allow the model to induce, track, and update action plans, and even handle exceptions.
-- a framework named ReAct where LLMs are used to generate both reasoning traces and task-specific actions in an interleaved manner.
-- The ReAct framework can allow LLMs to interact with external tools to retrieve additional information that leads to more reliable and factual responses.
-- ReAct enables agents to provide additional context, feedback, or clarifications to the LLM, and then create updated responses based on this new information or outputs from actions taken in previous steps.
-
 
 ## Reference
+- https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/52338430/7aa0cda1-b1c4-4df8-825c-5c758b05779f/10-Prompt-Engineering.md
 - https://www.promptingguide.ai/
 - https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions
 - https://github.com/microsoft/generative-ai-for-beginners/tree/main/04-prompt-engineering-fundamentals
