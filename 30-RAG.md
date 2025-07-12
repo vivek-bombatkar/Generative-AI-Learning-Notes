@@ -2,6 +2,111 @@
 
 # 30 RAG | Retrieval Augmented Generation
 
+
+---
+
+### RAG (Retrieval-Augmented Generation)
+An architecture that combines information retrieval (e.g., vector search) with generative models to produce contextually accurate responses by injecting external documents into prompts.
+
+### Embeddings
+Vector representations of text that capture semantic meaning, enabling similarity search in vector databases.
+
+### Vector Database
+A specialized database for storing and querying embeddings. Commonly used in RAG to retrieve semantically similar chunks.
+
+### Chunking
+The process of splitting large documents into smaller, meaningful segments for embedding and retrieval.
+
+### Re-ranking
+A post-processing step that refines the list of retrieved documents using ML or heuristics to improve relevance.
+
+### Hybrid Search
+Combines traditional keyword-based search with vector search to improve recall and precision.
+
+### Retrieval Pipeline
+A sequence of operations: user input → embed → search → rerank → augment → generate.
+
+### Context Window
+The maximum number of tokens an LLM can consider in a single prompt. Retrieved content must fit this limit.
+
+---
+
+## 🧠 RAG Workflow Understanding
+**Prompt:**  
+> "Explain step-by-step how Retrieval-Augmented Generation works using embeddings and a vector store."
+
+---
+
+## 🔗 Chunking Strategy
+**Prompt:**  
+> "Compare fixed, token-based, semantic, and hierarchical chunking strategies. When should each be used in a RAG pipeline?"
+
+---
+
+## 🧬 Embeddings
+**Prompt:**  
+> "What are text embeddings and how are they used in LLM-based retrieval systems like RAG? Include example Python code using HuggingFace."
+
+---
+
+## 📦 Vector Database Selection
+**Prompt:**  
+> "Compare Pinecone, FAISS, Weaviate, and Milvus for use in LLM RAG applications. Evaluate based on speed, scalability, hybrid search, and integration."
+
+---
+
+## 🔁 RAG Retrieval + Generation Chain
+**Prompt:**  
+> "Design a LangChain pipeline that retrieves context from a Qdrant DB and uses Claude to answer the query."
+
+---
+
+## 🔍 OpenSearch Integration
+**Prompt:**  
+> "Explain how OpenSearch can be used as a vector store in a RAG system. Include the steps for uploading documents, indexing, and querying with DSL."
+
+---
+
+## 📊 RAG Evaluation
+**Prompt:**  
+> "List and describe the key metrics used to evaluate RAG systems, such as context precision, context recall, and faithfulness."
+
+---
+
+## 🧪 Prompt for RAG Debugging
+**Prompt:**  
+> "How can I validate if retrieved documents are contributing to the model's output? What debug techniques are used in LangSmith?"
+
+---
+
+## 🎛️ Hybrid Search
+**Prompt:**  
+> "Create a hybrid search query that combines keyword match and vector similarity in OpenSearch. Describe why it improves performance."
+
+---
+
+## 🧠 Chain of Thought in RAG
+**Prompt:**  
+> "How can chain-of-thought prompting enhance multi-step reasoning in RAG applications? Provide an example prompt."
+
+---
+
+## 🔐 Fine-Grained Access Control
+**Prompt:**  
+> "Explain how OpenSearch uses FGAC to secure access to vector search queries in a RAG application."
+
+---
+
+## 🛡️ Security Prompt
+**Prompt:**  
+> "What security layers should be added when deploying a production-grade RAG system? Discuss VPC, IAM, FGAC, and Cognito."
+
+
+
+---
+
+## AWS Workshop Notes
+
 Before a text generation model is able to answer questions and we can take advantage of a RAG architecture, the documents must be processed and stored in a document store index, following these steps:
 
 1. Load the documents  
