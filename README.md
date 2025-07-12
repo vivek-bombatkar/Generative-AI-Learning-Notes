@@ -6,8 +6,8 @@ Instead of relying on lengthy notes that quickly become outdated, prompts let yo
 
 
 - [00 LLM basics](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/00-LLM-Basics.md)
-- 10 Prompt Engineering
-- 20 LLM-Based Applications
-- 30 RAG
-- 40 Agents
+- [10 Prompt Engineering](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/10-Prompt-Engineering.md)
+- [20 LLM-Based Applications](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/20-GenAI-Based-Applications.md)
+- [30 RAG](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/30-RAG.md)
+- [40 Agents](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/40-Agents.md)
 - 50 LLM Building and fine-tuning
