@@ -1,78 +1,7 @@
-
-# Reference
-- https://github.com/vivek-bombatkar/generative-ai-for-beginners?tab=readme-ov-file
+# 00 LLM Basics 
 
 
-# LLM FM Inference parameters - 2 Types
-
-## 1. Randomness and diversity 
-- Temperature: controls randomness in word choice. Lower values lead to more predictable responses. 
-- Top K limits word choices to the K most probable options. Lower values reduce unusual responses.
-- Top P cuts off low probability word choices based on cumulative probability. It tightens overall response distribution.
-
-## 2. Length
-- Response length sets minimum and maximum token counts. It sets a hard limit on response size.
-- Length penalty encourages more concise responses by penalizing longer ones. It sets a soft limit on size.
-- Stop sequences include specific character combinations that signal the model to stop generating tokens when encountered. It is used for the early termination of responses.
-
-## Generative AI Application Architecture Patterns
-### Text summarization pattern For large documents or text
-- map-reduce architecture and apply the concepts of chunking and chaining prompts.  The test summarization architecture for large documents includes the following steps:  
-  1. Split a large document into multiple small number (n) chunks using tools such as LangChain.  
-  2. Send each chunk to the FM to generate a corresponding summary.  
-  3. Append the next chunk to the first summary generated and summarize again.  
-  4. Iterate on each chunk to create a final summarized output.  
-### AI assistant pattern
-- This architecture includes the following steps:
-  1. The user queries the AI assistant.  
-  2. The chat history (if there is any) is passed on to the Amazon Bedrock model along with the user’s current query.  
-  3. The model then generates a response.   
-  4. The model passes the response back to the user.
-### AI assistant use cases
-- 1 Basic AI assistant: This is a zero-shot AI assistant with an FM model.
-- 2 AI assistant using a prompt template: This is an AI assistant with some context provided in the prompt template.
-- 3 AI assistant with a persona: This is an AI assistant with defined roles, such as a career coach with human interactions.
-- 4 Contextual-aware AI assistant: This is an AI assistant that passes context through an external file by generating embeddings.
-
-
-
-
-
-
-
-# The Prompting / Prompt Engineering
-- https://www.promptingguide.ai/
-- https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions
-- https://github.com/microsoft/generative-ai-for-beginners/tree/main/04-prompt-engineering-fundamentals
-- Prompt Prefixes: Add a prefix like "As a knowledgeable advisor:" before the prompt to steer the model's response style.
-- Prompt Decomposition: Break down the prompt into sub-prompts like "What are typical extracurricular activities for high school students?" and "What factors should be considered when recommending an activity to a student?"
-- Prompt Reframing: Rephrase the prompt to be more specific, e.g. "Recommend an extracurricular activity suitable for a high school student based on their interests and schedule availability."
-- Prompt Constraints: Add constraints like "Suggest an activity that is low-cost and doesn't require travel" to narrow down the response.
-- Prompt Mirroring: Ask the model to first rephrase or summarize the prompt to check its understanding before providing a suggestion.
-
-
-
-# RAG Applications: Built and deployed Retrieval-Augmented Generation (RAG) applications utilizing vector databases and Mistral AI-Language models with LangChain.
-| Question | Answer |
-|----------|--------|
-| What is a RAG (Retrieval-Augmented Generation) application? | RAG is a technique where external knowledge is retrieved from a database (such as a vector store) and used to augment the generation of responses by an AI model. This enables the model to provide more accurate and up-to-date information by retrieving specific context during inference. |
-| How does the integration of vector databases improve RAG applications? | Vector databases store embeddings of documents or data as vectors, enabling semantic search. Instead of exact keyword matching, the vector store finds contextually relevant data, enhancing the model's ability to retrieve relevant information for generation. |
-| What is the role of LangChain in building RAG applications? | LangChain is a framework that simplifies the creation of chains of prompts, LLMs, and retrievers. It allows developers to easily connect language models with retrieval systems, enabling complex workflows like RAG applications where context needs to be fetched from external sources. |
-| What is Mistral AI, and how is it used in RAG applications? | Mistral AI provides high-performing, open-source language models that can be used for generating text. In RAG applications, these models generate responses based on the context retrieved from vector databases, making them more accurate and relevant. |
-| How do vector databases store and retrieve information? | Vector databases store data as high-dimensional embeddings, which are mathematical representations of text. When a query is made, it is transformed into an embedding, and the database retrieves data based on proximity (similarity) to this embedding using techniques like nearest neighbor search. |
-| Can you describe how you integrated Mistral AI-Language models into your RAG system? | Mistral AI models were integrated into the RAG workflow as the generation engine. After retrieving relevant context from the vector database, the retrieved data is passed to the Mistral model for generating the final response that incorporates both the model's knowledge and the retrieved information. |
-| What challenges did you face while deploying RAG applications? | Some of the challenges include managing the latency involved in retrieving data from vector stores, ensuring that the retrieved information is relevant to the prompt, and effectively integrating the retrieval process with language generation to produce coherent and contextually accurate responses. |
-| How does the retrieval process in a RAG application work? | The retrieval process begins with converting the user's query into a vector (embedding). This vector is then used to search the vector database for semantically similar embeddings (documents). The retrieved documents are passed as context to the language model, which then generates the response. |
-| What type of use cases are suitable for RAG applications? | RAG applications are ideal for use cases requiring dynamic, up-to-date information retrieval, such as customer support, knowledge base querying, document generation, technical support, and real-time data analysis. |
-| How do you evaluate the effectiveness of a RAG application? | Effectiveness is evaluated by measuring the relevance of retrieved information, the coherence of the generated response, and the overall performance (latency and accuracy). Metrics such as precision, recall, and F1 score can be used for the retrieval component, while BLEU or ROUGE scores can be used for generation. |
-| What are the advantages of using vector-based search over traditional keyword-based search in RAG applications? | Vector-based search allows for semantic search, meaning it understands the meaning of the text and can retrieve contextually relevant information even if the exact words are not present in the query. This leads to more accurate and meaningful retrieval in response to user queries. |
-| How do you ensure the retrieval of relevant documents for a query in a RAG system? | Relevance is ensured by fine-tuning the embedding models that generate vector representations, using similarity metrics (e.g., cosine similarity) to match the query vector to stored vectors, and carefully designing the retrieval logic to focus on the most relevant sections of the knowledge base. |
-| What role do embeddings play in the RAG architecture? | Embeddings are vectorized representations of text that capture semantic meaning. They are essential for the retrieval process in RAG, enabling efficient and relevant matching between the query and stored documents in a vector database. |
-| Can you explain how chain-of-thought prompting could be combined with RAG? | Chain-of-thought prompting can be used with RAG by first retrieving relevant documents and then guiding the model to reason through the task step-by-step. This could involve a sequence of prompts that allow the model to iteratively refine its response using the retrieved context. |
-| How did you manage the interaction between retrieval and generation in the LangChain framework? | The LangChain framework was used to manage the chain between the retrieval and generation components. After receiving the query, the framework invokes the retriever (vector database), fetches relevant documents, and then passes these documents to the LLM to generate a final response. This workflow ensures a seamless transition between retrieval and generation. |
-
-
-
+## LLM Basic Concept
 
 | Concept | Explanation |
 |---------|-------------|
@@ -82,7 +11,7 @@
 | 200K token context window | The model has a **200,000-token context window**, meaning it can handle up to 200,000 tokens in memory for a single input/output session. This includes both the input tokens and output tokens, allowing the model to "remember" a long conversation or document. |
 
 
-# the factors to consider when selecting a language model. 
+## The factors to consider when selecting a language model. 
 
 | Factor | Description |
 |--------|-------------|
@@ -102,52 +31,19 @@
 | 14. Longevity and Future-Proofing | - Frequency of model updates<br>- Provider's future roadmap and continued support |
 
 
-# **Prompt Engineering techniques** commonly used with large language models like GPT-3, GPT-4, and other similar models:
+## LLM Foundation Model | Inference parameters - 2 Types
+### 1. Randomness and diversity 
+- Temperature: controls randomness in word choice. Lower values lead to more predictable responses. 
+- Top K limits word choices to the K most probable options. Lower values reduce unusual responses.
+- Top P cuts off low probability word choices based on cumulative probability. It tightens overall response distribution.
 
-| **Technique** | **Description** |
-|---------------|-----------------|
-| **Zero-Shot Prompting** | Asking the model to perform a task without providing any examples. The model relies on its pre-trained knowledge. |
-| **Few-Shot Prompting** | Providing a few examples of the task (input-output pairs) in the prompt to guide the model’s output. This helps the model understand the task with minimal examples. |
-| **One-Shot Prompting** | A special case of few-shot prompting where only one example is provided to guide the model's response. |
-| **Chain-of-Thought Prompting** | A technique where the model is prompted to generate intermediate reasoning steps before reaching a final answer. This improves the model’s performance in tasks that require logical reasoning or problem-solving. |
-| **Instruction-Based Prompting** | Giving explicit instructions to the model on how to respond or behave for a particular task. For example, “Explain this concept in simple terms” or “Generate a summary of this text.” |
-| **CoT + Self-Consistency** | Similar to chain-of-thought prompting, but here multiple reasoning paths are generated. The final answer is chosen based on the most consistent reasoning path. |
-| **Reframing** | Changing the prompt's wording or structure without changing its meaning to influence how the model responds. This can help steer the model toward more accurate or creative outputs. |
-| **Multi-Turn Prompting** | Asking the model to respond to multiple prompts in sequence, which simulates a conversational or interactive problem-solving scenario. |
-| **Output Priming** | Providing part of the expected answer or formatting the output in a specific way to guide the model toward a specific type of response (e.g., bulleted lists, steps, or tables). |
-| **Role-Playing** | Assigning the model a specific role or persona to guide its responses, such as “You are a teacher,” “You are a data scientist,” or “You are a customer service agent.” |
-| **Dynamic Prompting** | Dynamically changing the prompt based on the model's previous responses to make the interaction more adaptive and context-aware. |
-| **Question-Answer Prompting** | Asking the model questions that lead to a final conclusion. Each question guides the model closer to the desired answer through a step-by-step process. |
-| **Contextual Prompting** | Including relevant context (e.g., background information or constraints) in the prompt to ensure the model responds in a manner that is aligned with that context. |
-| **Task Specification** | Clearly specifying the task or goal in the prompt. For instance, "Translate this text into French" or "Summarize this article in three bullet points." |
-| **Iterative Prompting** | Iteratively refining the prompt based on the model's responses, often involving multiple interactions to get closer to the desired output. |
-| **Prefix Prompting** | Adding a prefix or hint to the input to influence the model’s behavior. For example, adding “Write a formal letter” before a text to generate a more formal response. |
-| **Temperature Control in Prompting** | Adjusting the **temperature** parameter to control randomness or creativity in responses (higher values for more creative, lower values for deterministic responses). |
-| **Reverse Prompting** | Presenting the expected output first, and asking the model to reverse-engineer or explain how it arrived at that conclusion. This helps with complex problem-solving tasks. |
-| **Prompt Chaining** | Breaking down a complex task into a series of smaller prompts, with each prompt building on the output of the previous one. This is useful for multi-step tasks. |
-| **Demonstration-Based Prompting** | Providing detailed, step-by-step demonstrations of the task, sometimes including explanations, before asking the model to perform the task. |
-| **Meta-Prompting** | Instructing the model on how to generate better prompts or adjust its output (i.e., giving instructions about how to give instructions). |
-| **Paraphrasing Prompts** | Rewriting the same prompt in different ways to elicit a variety of responses, particularly useful for ambiguous tasks or creative outputs. |
-| **Prompt Ensembling** | Using multiple prompts with slight variations, aggregating the results, or choosing the best response among them to improve reliability. |
-| **Active Prompting** | Asking the model questions in the prompt itself that it needs to answer before generating the final response. This makes the model think actively as it generates its final output. |
-| **Prompt Constraints** | Including explicit constraints in the prompt, such as character limits, formality level, or specific response formatting (e.g., “Answer in 100 words or less”). |
-| **Few-Shot In-Context Learning** | Providing task-specific data within the prompt itself and leveraging it for in-context learning to adapt to a particular use case without fine-tuning. |
-| **Template-Based Prompting** | Using predefined templates to structure the input in a way that aligns with the model’s strengths, ensuring more accurate outputs (e.g., pre-defined questions or sentence structures). |
+### 2. Length
+- Response length sets minimum and maximum token counts. It sets a hard limit on response size.
+- Length penalty encourages more concise responses by penalizing longer ones. It sets a soft limit on size.
+- Stop sequences include specific character combinations that signal the model to stop generating tokens when encountered. It is used for the early termination of responses.
 
 
-# comparison of **LangSmith**, **LangGraph**, and **LangChain** in tabular format:
-
-| **Feature/Aspect**         | **LangSmith**                                    | **LangGraph**                                 | **LangChain**                                 |
-|----------------------------|--------------------------------------------------|-----------------------------------------------|-----------------------------------------------|
-| **Primary Purpose**         | Model evaluation, testing, and monitoring for LLM workflows. | A visual interface for building and debugging LLM pipelines. | A framework for building, managing, and deploying LLM applications with advanced chains and integrations. |
-| **Use Case**                | Evaluate and monitor the performance and efficiency of LLM-based workflows. | Visualize and debug the flow of data between various components in LLM systems. | Develop LLM-powered applications, such as chatbots, RAG systems, and multi-agent pipelines. |
-| **Core Focus**              | Debugging, testing, and optimizing agent behaviors and prompt workflows. | Visual design of pipelines with a focus on data flow and interaction between steps. | Flexibility in building advanced chains for LLM-based apps with extensive integrations. |
-| **Strengths**               | - Testing and monitoring LLM applications. <br> - Fine-tuning and performance analysis.<br> - Great for iterating and optimizing prompts. | - Intuitive visual design interface.<br> - Real-time debugging.<br> - Best for prototyping complex workflows visually. | - Extensive integration with external tools.<br> - Pre-built components for rapid development.<br> - Customizability for chaining LLM models with additional tools (like databases). |
-| **Visual Interface**        | No dedicated visual interface; mainly focused on backend testing and debugging tools. | Yes, provides a graphical interface for building and visualizing workflows. | No native visual design interface but highly modular with code-based chain building. |
-| **Chain Composition**       | Supports testing of chain components but not designed to build chains directly. | Focuses on visualizing how components interact in the chain. | Build and manage complex chains, integrating LLMs with APIs, databases, and more. |
-
-
-# **five popular chat models** in tabular format:
+## **five popular chat models** in tabular format:
 
 | **Model**                   | **OpenAI GPT-4**                              | **Anthropic Claude 2**                        | **Google PaLM 2 (Bison)**                    | **Meta LLaMA 2**                             | **Mistral 7B**                               |
 |-----------------------------|-----------------------------------------------|-----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
@@ -165,7 +61,7 @@
 
 
 
-# Key Aspects of Open-Weight Models:
+## Key Aspects of Open-Weight Models:
 
 | **Aspect**               | **Description**                                                                                                  |
 |--------------------------|------------------------------------------------------------------------------------------------------------------|
@@ -193,8 +89,7 @@
 In contrast, **closed-weight models** like GPT-4 or Google's Bard only offer API access and do not share their internal weights, limiting user flexibility and requiring dependence on third-party platforms for usage.
 
 
-# **"Download the Model Weights"** and **"Download the Actual Model"** are often used interchangeably but represent slightly different aspects of a machine learning model. Let’s clarify the distinction between the two:
-
+### **"Download the Model Weights"** and **"Download the Actual Model"** are often used interchangeably but represent slightly different aspects of a machine learning model. Let’s clarify the distinction between the two:
 
 | **Aspect**                   | **Download Model Weights**                                        | **Download Actual Model**                                          |
 |------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -206,39 +101,7 @@ In contrast, **closed-weight models** like GPT-4 or Google's Bard only offer API
 | **Flexibility**               | More flexible for using different architectures or frameworks    | Easier for direct usage, but less flexible for custom architectures|
 
 
-
-
-# Factors to Consider When Selecting a Vector Database for LLM RAG
-
-| **Factor**                        | **Description**                                                                 | **Examples of Vector Databases**                                |
-|-----------------------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------|
-| **Search Efficiency**             | How fast and accurately the database can retrieve relevant vectors.              | Pinecone, Weaviate, FAISS                                      |
-| **Scalability**                   | Ability to handle large datasets with millions or billions of vectors.           | Pinecone, Milvus, Vespa                                        |
-| **Indexing & Querying Speed**     | Speed of creating indexes and querying them (e.g., ANN techniques like HNSW, IVF)| FAISS, Milvus, Qdrant                                          |
-| **Distributed & Fault-Tolerance** | Support for distributed architectures and high availability.                     | Pinecone, Milvus, Vespa                                        |
-| **Integration with LLM Pipelines**| How well it integrates with LLM workflows, APIs, and libraries like LangChain.   | Pinecone, Weaviate, Zilliz                                     |
-| **Support for Hybrid Search**     | Combination of vector and traditional keyword search for more precise results.   | Vespa, Weaviate, Qdrant                                        |
-| **Extensibility & Flexibility**   | Customizable features, ability to adapt to various use cases (RAG, recommendation)| Weaviate, Milvus, Vespa                                        |
-| **Real-Time Search**              | Support for real-time updates and searches, important for dynamic datasets.       | Qdrant, Weaviate                                               |
-| **Memory & Resource Efficiency**  | Resource usage, especially in terms of memory and disk space, when scaling up.   | FAISS, Pinecone                                                |
-| **Data Privacy & Security**       | Secure handling of data, including encryption and compliance with regulations.    | Pinecone, Milvus                                               |
-| **Cloud vs On-Premise Support**   | Whether the solution supports cloud-native deployment or on-premise installations.| Pinecone (cloud-native), Weaviate (both cloud and on-premise)   |
-| **Community & Support**           | Availability of community, enterprise support, and documentation.                 | Milvus (open-source, large community), Pinecone (enterprise)    |
-
-### Example Databases for LLM RAG Use Cases
-
-| **Database**     | **Key Features**                                                     | **Best for RAG Use Cases**                                      |
-|------------------|---------------------------------------------------------------------|-----------------------------------------------------------------|
-| **Pinecone**     | Fully managed, scalable, fast approximate nearest neighbor (ANN)     | Fast, scalable retrieval; integrates well with LangChain        |
-| **Weaviate**     | Supports hybrid search, modular, open-source, flexible deployment    | Hybrid search, real-time indexing, flexible LLM integration     |
-| **Milvus**       | Open-source, distributed, scalable, HNSW/IVF-based indexing          | Large-scale deployments, integration with vector search models  |
-| **FAISS**        | Facebook’s open-source library for efficient similarity search       | High-performance local deployments, resource-efficient          |
-| **Vespa**        | Hybrid search (vector + text), supports advanced use cases like recommendations | Hybrid search, recommendation engines                           |
-| **Qdrant**       | Open-source, optimized for real-time vector search                   | Real-time search, efficient for dynamic datasets                |
-
-
-
-# **ideal business use cases** for **Prompt Engineering**, **Retrieval-Augmented Generation (RAG)**, and **LLM Fine-Tuning**:
+## **ideal business use cases** for **Prompt Engineering**, **Retrieval-Augmented Generation (RAG)**, and **LLM Fine-Tuning**:
 
 | **Category**              | **Ideal Business Use Cases**                                                                                   | **Key Benefits**                                                                                            | **When to Use**                                                                                                                                                 |
 |---------------------------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -259,6 +122,9 @@ In contrast, **closed-weight models** like GPT-4 or Google's Bard only offer API
 | **Model Similarity**  | Measures how closely the generated response matches the reference data (ground truth) in meaning and content.| Important in tasks like machine translation, summarization, and paraphrasing, where high similarity to ground truth is desired.      | Calculated using metrics like cosine similarity, BLEU score, or ROUGE to assess the similarity between the generated output and the reference text.                         |
 
 
+
+# Reference
+- https://github.com/vivek-bombatkar/generative-ai-for-beginners?tab=readme-ov-file
 
 
 
