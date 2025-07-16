@@ -95,3 +95,5 @@ A Large Language Model (LLM) is an artificial intelligence system trained on vas
 
 ## Resources:
 - [microsoft / AutoGen / development of LLM applications using multiple agents  ](https://microsoft.github.io/autogen/docs/Getting-Started)
+- https://research.trychroma.com/context-rot
+- 
