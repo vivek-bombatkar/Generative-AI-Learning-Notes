@@ -280,11 +280,13 @@ Explicitly defining response limits or structure in your prompt, such as word co
 
 ## Reference
 - https://www.promptingguide.ai/
+- https://cookbook.openai.com/articles/related_resources
 - https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/
 - https://cookbook.openai.com/articles/techniques_to_improve_reliability
 - https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions
 - https://github.com/microsoft/generative-ai-for-beginners/tree/main/04-prompt-engineering-fundamentals
 - https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/52338430/7aa0cda1-b1c4-4df8-825c-5c758b05779f/10-Prompt-Engineering.md
+  
 
 
 
