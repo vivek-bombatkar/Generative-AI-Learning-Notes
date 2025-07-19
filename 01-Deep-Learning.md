@@ -15,4 +15,25 @@
 - Transformers process the sequence in `parallel`, which speeds up the training and allows much bigger datasets to be used.
 - Large language models contain many billions of features, which captures a wide range of human knowledge.
 
+- Data drift is when there are significant changes to the data distribution compared to the data used for training. 
+- Concept drift is when the properties of the target variables change.
+- Accuracy measures how close the predicted class values are to the actual values.
+- The formula for accuracy is the number of true positives plus true negatives divided by the total number of predictions.
+
+- Precision measures how well an algorithm predicts true positives out of all the positives that it identifies.
+- The formula is the number of true positives divided by the number of true positives, plus the number of false positives.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
