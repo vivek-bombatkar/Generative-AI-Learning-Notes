@@ -2,12 +2,23 @@
 
 This document provides reusable prompts for each major subtopic under "LLM Basic," along with definitions only for concepts unlikely to become outdated. 
 
+
 ---
 
 ## 1. LLM Basic Concept
 
 **Definition**:  
-A Large Language Model (LLM) is an artificial intelligence system trained on vast text data to understand and generate human language.
+- A Large Language Model (LLM) is an artificial intelligence system trained on vast text data to understand and generate human language.
+- Large language models contain many billions of features, which captures a wide range of human knowledge.
+- Transformers were introduced in a 2017 paper called "Attention Is All You Need." Some LLMs, such as ChatGPT, are built on the transformer architecture.
+- An innovation of transformers is this self-attention mechanism.
+- Self-attention works by computing a set of query, key and value vectors for each input token.
+- Then it uses the dot products between these vectors to determine the attention weights.
+- The output for each token is a weighted sum of the value vectors where the weights come from the attention scores.
+-   
+- every language-based generative AI model has a tokenizer that converts human text into a vector that contains token IDs or input IDs. Each input ID represents a token in the model's vocabulary.
+- A vector is an ordered list of numbers that represent features or attributes of some entity or concept. In the context of generative AI, vectors might represent words, phrases, sentences, or other units.
+- 
 
 **Prompt**:  
 - *"Explain the core concept of Large Language Models (LLMs) and their primary function in AI."*
