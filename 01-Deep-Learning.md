@@ -13,27 +13,21 @@
 - They use `transformer` neural networks, which change an input sequence, in Gen AI known as prompt, into an output sequence, which is the response to your prompt.
 - Neural networks process the elements of a sequence `sequentially` one word at a time.
 - Transformers process the sequence in `parallel`, which speeds up the training and allows much bigger datasets to be used.
-- Large language models contain many billions of features, which captures a wide range of human knowledge.
 
+## Data drift
 - Data drift is when there are significant changes to the data distribution compared to the data used for training. 
 - Concept drift is when the properties of the target variables change.
+
+## Accuracy
 - Accuracy measures how close the predicted class values are to the actual values.
 - The formula for accuracy is the number of true positives plus true negatives divided by the total number of predictions.
 
+## Precision
 - Precision measures how well an algorithm predicts true positives out of all the positives that it identifies.
 - The formula is the number of true positives divided by the number of true positives, plus the number of false positives.
 
-
-
-
-
-
-
-
-
-
-
-
-
+## Recall
+- Recall, is also known as sensitivity or the true positive rate.
+- However, if recall and precision are both important to us, the F1 score balances precision and recall by combining them in a single metric
 
 
