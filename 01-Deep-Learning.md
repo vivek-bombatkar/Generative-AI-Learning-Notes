@@ -30,4 +30,9 @@
 - Recall, is also known as sensitivity or the true positive rate.
 - However, if recall and precision are both important to us, the F1 score balances precision and recall by combining them in a single metric
 
+## ROUGE 
+- Recall-Oriented Understudy for Gisting Evaluation, is primarily employed to assess the quality of automatically-generated summaries by comparing them to human-generated reference summaries
+
+## BLEU
+- Bilingual Evaluation Understudy, is an algorithm designed to evaluate the quality of machine-translated texts by comparing it to human-generated translations.
 
