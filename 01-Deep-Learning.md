@@ -7,6 +7,10 @@
 - Information flows through the network in a forward direction from input to output.
 - During training, the `difference` between the `predicted` output and the `actual` output is then calculated.
 - The `weights` of the neurons are repeatedly adjusted to minimize the error.
+- CNN - Image processing
+- RNN - Natural Language processing
+- KNN - K-Nearest neighbour, slow in inference. As most of the computations happens at infereence stage. 
+- 
 
 ## Generative AI
 - Generative AI is accomplished by using deep learning models that are pre-trained on extremely large datasets containing strings of text or, in AI terms, sequences.
