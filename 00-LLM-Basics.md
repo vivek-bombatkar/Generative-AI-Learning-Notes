@@ -15,10 +15,11 @@ This document provides reusable prompts for each major subtopic under "LLM Basic
 - Self-attention works by computing a set of query, key and value vectors for each input token.
 - Then it uses the dot products between these vectors to determine the attention weights.
 - The output for each token is a weighted sum of the value vectors where the weights come from the attention scores.
--   
+- All language models are trained from large text databases, such as RefinedWeb, Common Crawl, StarCoder data, BookCorpus, Wikipedia, C4, and more.    
 - every language-based generative AI model has a tokenizer that converts human text into a vector that contains token IDs or input IDs. Each input ID represents a token in the model's vocabulary.
 - A vector is an ordered list of numbers that represent features or attributes of some entity or concept. In the context of generative AI, vectors might represent words, phrases, sentences, or other units.
-- 
+- When you write a prompt for a language model, that prompt refers to its ***Latent Space*** against its database of statistics. It returns a pile of statistics that then get assembled as words.
+- Latent space refers to a high-dimensional vector space where an LLM represents the semantic meaning of language in a compressed, abstract form.
 
 **Prompt**:  
 - *"Explain the core concept of Large Language Models (LLMs) and their primary function in AI."*
