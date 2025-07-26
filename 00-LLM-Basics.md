@@ -20,6 +20,10 @@ This document provides reusable prompts for each major subtopic under "LLM Basic
 - A vector is an ordered list of numbers that represent features or attributes of some entity or concept. In the context of generative AI, vectors might represent words, phrases, sentences, or other units.
 - When you write a prompt for a language model, that prompt refers to its ***Latent Space*** against its database of statistics. It returns a pile of statistics that then get assembled as words.
 - Latent space refers to a high-dimensional vector space where an LLM represents the semantic meaning of language in a compressed, abstract form.
+- difference between pre-training and fine-tuning
+  - pre-training, you train the LLM by using huge amounts of unstructured data with self-supervised learning.
+  - fine-tuning, supervised learning process and you use a dataset of labeled examples to update the weights of the LLM
+   
 
 **Prompt**:  
 - *"Explain the core concept of Large Language Models (LLMs) and their primary function in AI."*
