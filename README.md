@@ -11,4 +11,4 @@ Feel free to click on each topic!
 - [20 LLM-Based Applications](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/20-GenAI-Based-Applications.md)
 - [30 RAG](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/30-RAG.md)
 - [40 Agents](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/40-Agents.md)
-- 50 LLM Building and fine-tuning
+- [50 LLM Building and fine-tuning](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/50-LLM-Building-fine-tuning.md)
