@@ -109,4 +109,4 @@ This document provides reusable prompts for each major subtopic under "LLM Basic
 ## Resources:
 - [microsoft / AutoGen / development of LLM applications using multiple agents  ](https://microsoft.github.io/autogen/docs/Getting-Started)
 - https://research.trychroma.com/context-rot
-- 
+- https://github.com/openai/evals/blob/main/README.md
