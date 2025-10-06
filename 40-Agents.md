@@ -132,7 +132,7 @@ An **agent** in AI is an autonomous system that perceives its environment, makes
 
 
 
-### Resources:
+# Resources:
 - https://github.com/promptadvisers/agentic-design-patterns-docs/tree/main
 - 
 
