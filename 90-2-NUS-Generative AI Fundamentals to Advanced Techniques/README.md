@@ -161,6 +161,227 @@ Its massive connectivity gives the brain extraordinary computational power.
     - 🔊 Audio  
     - Other semi-structured data
 ---
+# 🧠 Deep Convolutional Neural Networks (CNNs)
+
+## 📌 Definition
+**Deep Convolutional Neural Networks (CNNs)** are a specialized type of neural network designed to process **structured, grid-like data**, especially **images** 🖼️.
+
+## 🧩 Key characteristics
+- Designed for **spatial data** arranged in grids
+- Combine:
+  - 🧠 **Convolutional layers** for feature extraction
+  - 🔗 **Fully connected layers** for decision-making
+- Inspired by the **human visual system**
+- Highly effective when **spatial hierarchies** matter
+
+## ⚙️ Core building blocks
+- 🟨 **Input**  
+- 🟩 **Convolutional Layer**. Extracts local features (edges, textures)
+- 🟦 **Pooling Layer**. Reduces spatial size and computation
+- 🧪 **Activation Function**. Adds non-linearity
+- 🔵 **Fully Connected Layer**. Performs classification or prediction
+- 🎯 **Output**
+
+## 👁️ Why CNNs work well
+- Learn **hierarchical features**. from simple edges to complex shapes
+- Preserve **spatial relationships** in data
+- Particularly strong for **vision-based tasks**
+
+## 📊 Typical use cases
+- Image classification
+- Object detection
+- Image segmentation
+- Visual pattern recognition
+
+## ✅ Advantages of CNNs
+- ⚙️ **Automatic Feature Extraction**  
+  - CNNs learn features directly from raw data  
+  - No manual feature engineering required
+- 🔁 **Parameter Sharing**  
+  - Same filters are reused across the image  
+  - Fewer parameters than fully connected networks
+- 📍 **Translation Invariance**  
+  - Recognize patterns (edges, shapes, objects) regardless of position in the image
+- 📐 **Efficient for High-Dimensional Data**  
+  - Scales well to large images and datasets
+- 🏆 **State-of-the-Art Performance**  
+  - Top results in:
+    - Image classification
+    - Object detection
+    - Image segmentation
+- 🌍 **Adaptability to Diverse Domains**  
+  - Can be applied to:
+    - 🖼️ Images
+    - 🔊 Audio spectrograms
+    - ⏱️ Time-series data  
+  - Requires minimal architectural changes
+
+## ⚠️ Limitations of CNNs
+- 💻 **Computationally Intensive**  
+  - Training requires powerful hardware (GPUs, TPUs)
+- 📊 **Data Hungry**  
+  - Needs large labelled datasets for good performance  
+  - Data collection and annotation can be expensive
+- 🔍 **Lack of Interpretability**  
+  - Acts as a black-box model  
+  - Difficult to understand or debug decisions
+- 📉 **Overfitting Risk**  
+  - Without proper regularisation, models may memorise training data
+- 🎛️ **Sensitivity to Hyperparameters**  
+  - Performance depends heavily on:
+    - Architecture
+    - Learning rate
+    - Other tuning choices
+
+---
+# 🤖 GPT Models and How ChatGPT Works
+
+## 🧮 Model Scale Comparison
+
+| Model   | Number of Parameters |
+|--------|----------------------|
+| GPT-1  | 117M |
+| GPT-2  | 1.5B |
+| GPT-3  | 175B |
+| GPT-3.5 | GPT-3 + ~6B |
+| GPT-4  | ~1.7T |
+
+## 🔁 How ChatGPT Works (End-to-End Flow)
+
+➡️ **Pre-training**  
+- Trained on massive internet text
+- Learns to predict the **next token**
+- Captures grammar, facts, and language patterns
+
+➡️ **Fine-tuning**  
+- Uses datasets reviewed by **human trainers**
+- Learns to generate safer and more helpful responses
+- Generalises from human feedback
+
+➡️ **Input Processing**  
+- User input is **tokenised** into words or subwords
+- Tokens are fed into the transformer model
+
+➡️ **Contextual Understanding**  
+- Maintains conversation history 🧠
+- Transformer architecture models long-range dependencies
+- Enables context-aware responses
+
+➡️ **Response Generation**  
+- Predicts next tokens based on learned patterns
+- Produces coherent, human-like text
+
+➡️ **Sampling and Optimisation**  
+- Uses probabilistic sampling 🎲
+- Adds controlled randomness for natural responses
+- Safety techniques reduce harmful outputs
+
+➡️ **Post-processing**  
+- Removes special tokens and formatting
+- Final response is shown to the user 💬
+---
+# 🧠 Attention Mechanism in Transformers
+
+## Attention
+At the core of modern NLP lies **attention**.  
+It allows models to **focus**, not memorise.  
+Instead of treating all words equally, attention helps the model decide **what matters most** in context.
+
+
+## 🔑 Query, Key, and Value (QKV)
+
+To understand attention, everything revolves around three components:
+
+### 🔍 Query (Q)
+- Represents the **current word or token**
+- Think of it as a word *asking* for relevant context
+
+### 🗝️ Key (K)
+- Represents **all words in the input sequence**
+- Each word has a key used to measure relevance to the query
+
+### 📦 Value (V)
+- Contains the **actual information** (embeddings)
+- This is the content passed forward once relevance is determined
+
+
+## ⚙️ How Attention Works (Step-by-Step)
+
+### 1️⃣ Compute Attention Scores
+- Compute the **dot product** between:
+  - Query (Q)
+  - Each Key (K)
+- Result. relevance scores for each word
+
+### 2️⃣ Scale the Scores
+- Scores are scaled by **√dk**
+- Prevents large values from dominating
+- Ensures numerical stability
+
+### 3️⃣ Apply Softmax
+- Converts scores into a **probability distribution**
+- Determines how much attention each word receives
+
+### 4️⃣ Weighted Sum of Values
+- Probabilities are applied to Values (V)
+- Produces a **context-aware representation**
+
+## 🎯 Why Attention Matters
+- Focuses on **relevant words**, regardless of position
+- Handles **long-range dependencies**
+- Essential for understanding meaning in complex sentences
+
+# 🧩 Multi-Head Attention
+
+## 🔀 What is Multi-Head Attention?
+- Instead of one attention mechanism, the model uses **multiple heads**
+- Each head attends to **different aspects** of the sequence
+
+## ⚙️ How It Works
+- Input is split into multiple Q, K, V sets
+- Each head computes attention **independently**
+- Outputs are:
+  - Concatenated
+  - Passed through a linear layer
+
+➡️ Result. richer and more expressive representations
+
+
+# 🧪 Feedforward Networks (FFN)
+
+## 🔧 Role of Feedforward Networks
+- Applied **after multi-head attention**
+- Operates **independently on each position**
+
+## 🏗️ Structure
+- Linear layer
+- ReLU activation
+- Linear layer
+
+## 🎯 Purpose
+- Captures **more abstract patterns**
+- Refines representations beyond word-to-word relationships
+- Output is passed to the next transformer layer
+
+
+# 🏗️ Transformer Architecture. Big Picture
+
+- 🔡 Embeddings
+- 🔁 Self-attention (QKV)
+- 🔀 Multi-head attention
+- 🧪 Feedforward networks
+- 🔄 Stacked layers for depth
+
+Together, these components allow transformers to:
+- Understand context deeply
+- Scale efficiently
+- Generate high-quality, human-like text
+---
+
+
+
+
+
 
 ---
 ## Visualise Deep Learning Models:
