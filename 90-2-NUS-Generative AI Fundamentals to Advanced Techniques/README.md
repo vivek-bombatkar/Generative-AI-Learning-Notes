@@ -9,6 +9,8 @@
 - [Transformer Model Families](#transformer-model-families)
 - [Alignment, Reliability, and Knowledge Grounding](#alignment-reliability-and-knowledge-grounding)
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
+- [Useful Links](#useful-links)
+
 
 
 ## Learning Paradigms in Machine Learning
@@ -663,6 +665,15 @@ This unified approach allows the model to handle diverse tasks without needing s
 GATO has been trained across a wide range of applications, from chat bots and gaming to robotic control, demonstrating its adaptability. citeturn2search3turn2search7  
 
 Its versatility represents a major shift from specialised AI systems towards scalable generalist AI models that can efficiently operate across multiple domains. citeturn2search3turn2search7  
+
+
+## Useful Links
+- https://paperswithcode.com/method/gptLinks to an external site.
+- https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-modelsLinks to an external site.
+- https://arxiv.org/abs/1810.04805Links to an external site.
+- https://huggingface.co/docs/transformers/en/model_doc/distilbertLinks to an external site.
+- https://github.com/huggingface/transformersLinks to an external site.
+- https://huggingface.co/docs/transformers/en/model_doc/bart
 
 ### Visualise Deep Learning Models
 
