@@ -1,4 +1,5 @@
 # Generative AI & Deep Learning Notes
+### My Learning Notes from [NUS generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
 
 ## Table of Contents
 - [Learning Paradigms in Machine Learning](#learning-paradigms-in-machine-learning)
@@ -9,12 +10,6 @@
 - [Alignment, Reliability, and Knowledge Grounding](#alignment-reliability-and-knowledge-grounding)
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
 
-This document is a refined, reorganized, and expanded version of my original notes. fileciteturn0file0
-
-Original course reference (preserved as-is):
-```text
-My Learning Notes from [NUS generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
-```
 
 ## Learning Paradigms in Machine Learning
 
