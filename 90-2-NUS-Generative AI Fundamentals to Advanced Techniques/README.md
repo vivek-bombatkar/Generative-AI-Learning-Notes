@@ -1,7 +1,7 @@
 # My Learning Notes from [NUS generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
 
 ---
-
+ 
 # Reinforcement Learning vs Supervised Learning
 - **Supervised Learning:** A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors.
 - **Reinforcement Learning (RL):** A learning paradigm where an agent learns by interacting with an environment using rewards and penalties.
