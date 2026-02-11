@@ -668,11 +668,11 @@ Its versatility represents a major shift from specialised AI systems towards sca
 
 
 ## Useful Links
-- https://paperswithcode.com/method/gptLinks to an external site.
-- https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-modelsLinks to an external site.
-- https://arxiv.org/abs/1810.04805Links to an external site.
-- https://huggingface.co/docs/transformers/en/model_doc/distilbertLinks to an external site.
-- https://github.com/huggingface/transformersLinks to an external site.
+- https://paperswithcode.com/method/gpt
+- https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-models
+- https://arxiv.org/abs/1810.04805
+- https://huggingface.co/docs/transformers/en/model_doc/distilbert
+- https://github.com/huggingface/transformers
 - https://huggingface.co/docs/transformers/en/model_doc/bart
 
 ### Visualise Deep Learning Models
