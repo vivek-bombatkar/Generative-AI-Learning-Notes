@@ -17,25 +17,12 @@
 
 ### Reinforcement Learning vs Supervised Learning
 
-- **Supervised Learning:** A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors.
-- **Reinforcement Learning (RL):** A learning paradigm where an agent learns by interacting with an environment using rewards and penalties.
+| Aspect | Supervised Learning | Reinforcement Learning (RL) |
+|---|---|---|
+| Definition | A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors. | A learning paradigm where an agent learns by interacting with an environment using rewards and penalties. |
+| Training steps | 1. Collect labelled data.<br>2. Split into training and validation sets.<br>3. Train model to minimize loss.<br>4. Evaluate performance. | 1. Initialize agent and environment.<br>2. Perform actions based on current policy.<br>3. Receive reward feedback.<br>4. Update policy using reward signal.<br>5. Repeat until convergence. |
+| Examples | Image classification, spam detection, price prediction. | Game playing, robotics control, recommendation strategies with delayed rewards. |
 
-#### Supervised Learning
-1. Collect labelled data.
-2. Split into training and validation sets.
-3. Train model to minimize loss.
-4. Evaluate performance.
-
-#### Reinforcement Learning
-1. Initialize agent and environment.
-2. Perform actions based on current policy.
-3. Receive reward feedback.
-4. Update policy using reward signal.
-5. Repeat until convergence.
-
-#### Examples
-- **Supervised Learning:** Image classification, spam detection, price prediction.
-- **Reinforcement Learning:** Game playing, robotics control, recommendation strategies with delayed rewards.
 
 ### Unsupervised Learning
 
