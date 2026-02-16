@@ -13,9 +13,9 @@
 
 
 
-## Learning Paradigms in Machine Learning
+# Learning Paradigms in Machine Learning
 
-### Reinforcement Learning vs Supervised Learning
+## Reinforcement Learning vs Supervised Learning
 
 | Aspect | Supervised Learning | Reinforcement Learning (RL) |
 |---|---|---|
@@ -24,33 +24,33 @@
 | Examples | Image classification, spam detection, price prediction. | Game playing, robotics control, recommendation strategies with delayed rewards. |
 
 
-### Unsupervised Learning
+## Unsupervised Learning
 
 - **Unsupervised Learning:** A branch of machine learning where models learn patterns and relationships from unlabelled data without predefined outputs.
 
 #### Examples
 
-##### Clustering Problems
+##### 1. Clustering Problems
 - Customer segmentation
 - Image segmentation
 
-##### Dimensionality Reduction Problems
+##### 2. Dimensionality Reduction Problems
 - Principal Component Analysis (PCA)
 - t-SNE
 
-##### Anomaly Detection
+##### 3. Anomaly Detection
 - Fraud detection
 
-##### Generative Models (partly unsupervised)
+##### 4. Generative Models (partly unsupervised)
 - Autoencoders
 - GANs (Generative Adversarial Networks)
 
-##### Market Basket Analysis
+##### 5. Market Basket Analysis
 - Identifying frequently co-occurring items
 
-## From Brains to Artificial Neural Networks
+# From Brains to Artificial Neural Networks
 
-### The Human Brain and Neural Complexity
+## The Human Brain and Neural Complexity
 
 #### Overview
 The human brain is an incredibly complex organ and one of nature's greatest engineering marvels.  
@@ -89,7 +89,7 @@ Its massive connectivity gives the brain extraordinary computational power.
   - Prefrontal cortex
 - Specialization minimizes unnecessary wiring and improves processing speed
 
-### Neural Networks and Artificial Neural Networks
+## Neural Networks and Artificial Neural Networks
 
 - Neural networks are inspired by biological brains.
 - Artificial neurons approximate real neurons.
@@ -105,25 +105,13 @@ Its massive connectivity gives the brain extraordinary computational power.
 ### Biological vs Artificial Neurons
 
 #### Biological Neurons
-- Biological neurons have **synaptic gaps** of varying strengths
-- These synapses connect to the **soma (cell body)**
-- Signal strength depends on synaptic weight and connectivity
-- Information flows via:
-  - Dendrites (input)
-  - Cell body (integration)
-  - Axon (signal transmission)
-  - Axon terminals (output)
+| Aspect | Biological Neurons | Artificial Neurons |
+|--------|-------------------|--------------------|
+| Synapses / Inputs | Biological neurons have **synaptic gaps** of varying strengths. | Artificial neurons replace synapses with **numerical inputs**. |
+| Connection Target | Synapses connect to the **soma (cell body)**. | Inputs can come from other neurons, sensors, data features, or variables. |
+| Signal Processing | Signal strength depends on synaptic weight and connectivity. | Core operations include weighted sum (Sigma) and activation or threshold function. |
+| Information Flow | Dendrites (input) → Cell body (integration) → Axon (signal transmission) → Axon terminals (output). | Inputs are aggregated using weighted sum, then passed through an activation function to produce output. |
 
-#### Artificial Neurons
-- Artificial neurons replace synapses with **numerical inputs**
-- Inputs can come from:
-  - Other neurons
-  - Sensors
-  - Data features
-  - Variables
-- Core operations include:
-  - Weighted sum (Sigma)
-  - Activation / threshold function
 
 #### Computational Power
 - The neocortex contains about **500 trillion synapses** operating **in parallel**
@@ -145,27 +133,19 @@ Its massive connectivity gives the brain extraordinary computational power.
 - While powerful, they are far less energy-efficient than the human brain
 - The neocortex remains a benchmark for efficient computation and learning
 
-### Artificial Neural Networks. Why?
+## Artificial Neural Networks. Why?
 
-- **Extremely powerful computational devices**  
-  - Turing-equivalent universal computers
-- **Massive parallelism**  
-  - Many simple units operate simultaneously, making computation efficient
-- **Learning and generalization**  
-  - Learn directly from training data  
-  - No need for carefully handcrafted rules or designs
-- **Fault-tolerant and noise-tolerant**  
-  - Performance degrades gracefully even with imperfect data or failures
-- **Beyond symbolic systems**  
-  - Can do everything a symbolic or logic-based system can, and more
-- **Excellent with unstructured data**  
-  - Particularly strong with:
-    - Text
-    - Images
-    - Audio
-    - Other semi-structured data
+| Feature | Description |
+|----------|-------------|
+| Extremely powerful computational devices | Turing-equivalent universal computers |
+| Massive parallelism | Many simple units operate simultaneously, making computation efficient |
+| Learning and generalization | Learn directly from training data. No need for carefully handcrafted rules or designs |
+| Fault-tolerant and noise-tolerant | Performance degrades gracefully even with imperfect data or failures |
+| Beyond symbolic systems | Can do everything a symbolic or logic-based system can, and more |
+| Excellent with unstructured data | Particularly strong with text, images, audio, and other semi-structured data |
 
-## Convolutional Neural Networks
+
+# Convolutional Neural Networks
 
 ### Deep Convolutional Neural Networks (CNNs)
 
@@ -200,46 +180,28 @@ Its massive connectivity gives the brain extraordinary computational power.
 - Visual pattern recognition
 
 #### Advantages of CNNs
-- **Automatic Feature Extraction**  
-  - CNNs learn features directly from raw data  
-  - No manual feature engineering required
-- **Parameter Sharing**  
-  - Same filters are reused across the image  
-  - Fewer parameters than fully connected networks
-- **Translation Invariance**  
-  - Recognize patterns (edges, shapes, objects) regardless of position in the image
-- **Efficient for High-Dimensional Data**  
-  - Scales well to large images and datasets
-- **State-of-the-Art Performance**  
-  - Top results in:
-    - Image classification
-    - Object detection
-    - Image segmentation
-- **Adaptability to Diverse Domains**  
-  - Can be applied to:
-    - Images
-    - Audio spectrograms
-    - Time-series data  
-  - Requires minimal architectural changes
+| Advantage | Description |
+|------------|-------------|
+| Automatic Feature Extraction | CNNs learn features directly from raw data. No manual feature engineering required. |
+| Parameter Sharing | Same filters are reused across the image. Fewer parameters than fully connected networks. |
+| Translation Invariance | Recognize patterns such as edges, shapes, and objects regardless of position in the image. |
+| Efficient for High-Dimensional Data | Scales well to large images and datasets. |
+| State-of-the-Art Performance | Top results in image classification, object detection, and image segmentation. |
+| Adaptability to Diverse Domains | Can be applied to images, audio spectrograms, and time-series data. Requires minimal architectural changes. |
+
 
 #### Limitations of CNNs
-- **Computationally Intensive**  
-  - Training requires powerful hardware (GPUs, TPUs)
-- **Data Hungry**  
-  - Needs large labelled datasets for good performance  
-  - Data collection and annotation can be expensive
-- **Lack of Interpretability**  
-  - Acts as a black-box model  
-  - Difficult to understand or debug decisions
-- **Overfitting Risk**  
-  - Without proper regularisation, models may memorise training data
-- **Sensitivity to Hyperparameters**  
-  - Performance depends heavily on:
-    - Architecture
-    - Learning rate
-    - Other tuning choices
+| Limitation | Description |
+|-------------|-------------|
+| Computationally Intensive | Training requires powerful hardware such as GPUs or TPUs. |
+| Data Hungry | Needs large labelled datasets for good performance. Data collection and annotation can be expensive. |
+| Lack of Interpretability | Acts as a black-box model. Difficult to understand or debug decisions. |
+| Overfitting Risk | Without proper regularisation, models may memorise training data. |
+| Sensitivity to Hyperparameters | Performance depends heavily on architecture, learning rate, and other tuning choices. |
+``
 
-## Transformers and Attention Mechanisms
+
+# Transformers and Attention Mechanisms
 
 ### Attention Mechanism in Transformers
 
@@ -255,31 +217,29 @@ A commonly used formulation is scaled dot-product attention:
 
 To understand attention, everything revolves around three components:
 
-- **Query (Q)**  
-  - Represents the **current word or token**
-  - Think of it as a word *asking* for relevant context
+| Component | Description |
+|------------|-------------|
+| Query (Q) | Represents the current word or token. Think of it as a word asking for relevant context. |
+| Key (K) | Represents all words in the input sequence. Each word has a key used to measure relevance to the query. |
+| Value (V) | Contains the actual information or embeddings. This is the content passed forward once relevance is determined. |
 
-- **Key (K)**  
-  - Represents **all words in the input sequence**
-  - Each word has a key used to measure relevance to the query
-
-- **Value (V)**  
-  - Contains the **actual information** (embeddings)
-  - This is the content passed forward once relevance is determined
 
 #### How Attention Works (Step-by-Step)
 
-- Compute **attention scores** using dot products between Query and Keys.
-- Scale scores by **sqrt(d_k)** for stability.
-- Apply **softmax** to get a probability distribution over tokens.
-- Take the **weighted sum of Values** to produce a context-aware representation.
+| Step | Operation | What Happens | Purpose |
+|------|-----------|--------------|----------|
+| 1 | Compute Attention Scores | Dot product between **Query (Q)** and all **Keys (K)** | Measure relevance between current token and others |
+| 2 | Scale Scores | Divide scores by **√dₖ** | Maintain numerical stability and prevent large gradients |
+| 3 | Apply Softmax | Convert scaled scores into probabilities | Create attention weights that sum to 1 |
+| 4 | Weighted Sum of Values | Multiply attention weights with **Values (V)** and sum | Produce context-aware representation |
+
 
 #### Why Attention Matters
 - Focuses on **relevant words**, regardless of position
 - Handles **long-range dependencies**
 - Essential for understanding meaning in complex sentences
 
-### Multi-Head Attention
+## Multi-Head Attention
 
 #### What is Multi-Head Attention?
 - Instead of one attention mechanism, the model uses **multiple heads**
@@ -309,7 +269,7 @@ Result. richer and more expressive representations
 - Refines representations beyond word-to-word relationships
 - Output is passed to the next transformer layer
 
-### Transformer Architecture. Big Picture
+## Transformer Architecture. Big Picture
 
 - Embeddings
 - Self-attention (QKV)
@@ -343,7 +303,7 @@ Together, these components allow transformers to:
 - Computational needs have grown **exponentially**
 - Hardware advances are critical for progress
 
-### Transformer Variants
+## Transformer Variants
 - Transformers excel at sequential data
 - Variants optimise performance for specific tasks
 
@@ -389,33 +349,18 @@ Together, these components allow transformers to:
 - Optimised for memory efficiency
 - Uses locality-sensitive hashing (LSH) attention and reversible layers
 
-## Transformer Model Families
+# Transformer Model Families
 
 ### BERT vs GPT vs T5
 
-#### BERT
-- **Bidirectional Encoder Representations from Transformers**
-- Understands text in **both directions**
-- Best suited for:
-  - Sentiment analysis
-  - Text classification
-  - Question answering
+### BERT vs GPT vs T5 Comparison
 
-#### GPT
-- **Generative Pre-trained Transformer**
-- **Autoregressive**. predicts the next word in a sequence
-- Ideal for:
-  - Conversational AI
-  - Content generation
-  - Code generation
+| Model | Full Form | Architecture Type | Directionality | Core Training Objective | Best Suited For |
+|-------|------------|------------------|----------------|------------------------|----------------|
+| **BERT** | Bidirectional Encoder Representations from Transformers | Encoder-only | Bidirectional | Masked Language Modeling | Sentiment analysis, Text classification, Question answering |
+| **GPT** | Generative Pre-trained Transformer | Decoder-only | Unidirectional (Autoregressive) | Next-token prediction | Conversational AI, Content generation, Code generation |
+| **T5** | Text-to-Text Transfer Transformer | Encoder-Decoder | Bidirectional (Encoder) + Autoregressive (Decoder) | Text-to-text transformation | Translation, Summarisation, Question answering |
 
-#### T5
-- **Text-to-Text Transfer Transformer**
-- Treats **all NLP tasks as text-to-text**
-- Highly versatile for:
-  - Translation
-  - Summarisation
-  - Question answering
 
 ### BERT limitations and common variants
 
@@ -432,7 +377,7 @@ Together, these components allow transformers to:
 - **SpanBERT:** masks contiguous spans and trains objectives tailored to span representations.
 - **CodeBERT:** pre-trained for natural language + programming language tasks (bimodal NL-PL).
 
-### GPT models and how ChatGPT works
+## GPT models and how ChatGPT works
 
 #### Model Scale Comparison
 
@@ -450,37 +395,16 @@ Notes/clarifications added:
 
 #### How ChatGPT Works (End-to-End Flow)
 
-**Pre-training**  
-- Trained on massive internet text
-- Learns to predict the **next token**
-- Captures grammar, facts, and language patterns
+| Stage | What Happens | Purpose |
+|-------|-------------|----------|
+| **Pre-training** | Trained on massive internet-scale text data. Learns to predict the **next token** and captures grammar, facts, and language patterns. | Build foundational language understanding and general knowledge. |
+| **Fine-tuning** | Further trained using datasets reviewed by **human trainers** and feedback signals. | Improve helpfulness, safety, and alignment with human intent. |
+| **Input Processing** | User input is **tokenised** into tokens (words or subwords) and converted into embeddings. | Convert raw text into numerical format the model can process. |
+| **Contextual Understanding** | Transformer processes tokens using self-attention. Conversation history is included to model long-range dependencies. | Generate context-aware understanding of the input. |
+| **Response Generation** | Model predicts next tokens sequentially based on learned probability distributions. | Produce coherent and relevant output text. |
+| **Sampling and Optimisation** | Uses probabilistic sampling methods (e.g., temperature, top-k, top-p). Adds controlled randomness while applying safety filters. | Balance creativity, coherence, and safety. |
+| **Post-processing** | Removes special tokens, applies formatting rules, and prepares final output. | Deliver clean, readable response to the user. |
 
-**Fine-tuning**  
-- Uses datasets reviewed by **human trainers**
-- Learns to generate safer and more helpful responses
-- Generalises from human feedback
-
-**Input Processing**  
-- User input is **tokenised** into words or subwords
-- Tokens are fed into the transformer model
-
-**Contextual Understanding**  
-- Maintains conversation history
-- Transformer architecture models long-range dependencies
-- Enables context-aware responses
-
-**Response Generation**  
-- Predicts next tokens based on learned patterns
-- Produces coherent, human-like text
-
-**Sampling and Optimisation**  
-- Uses probabilistic sampling
-- Adds controlled randomness for natural responses
-- Safety techniques reduce harmful outputs
-
-**Post-processing**  
-- Removes special tokens and formatting
-- Final response is shown to the user
 
 ### Encoder-decoder models and key examples
 
