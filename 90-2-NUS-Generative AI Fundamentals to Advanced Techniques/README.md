@@ -17,25 +17,25 @@
 
 ### Reinforcement Learning vs Supervised Learning
 
-- **Supervised Learning:** A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors. citeturn20search0  
-- **Reinforcement Learning (RL):** A learning paradigm where an agent learns by interacting with an environment using rewards and penalties. citeturn5search0  
+- **Supervised Learning:** A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors.   
+- **Reinforcement Learning (RL):** A learning paradigm where an agent learns by interacting with an environment using rewards and penalties.   
 
 #### Supervised Learning
-1. Collect labelled data. citeturn20search0˙  
-2. Split into training and validation sets. citeturn20search0  
-3. Train model to minimize loss. citeturn20search0  
-4. Evaluate performance. citeturn20search0  
+1. Collect labelled data. ˙  
+2. Split into training and validation sets.   
+3. Train model to minimize loss.   
+4. Evaluate performance.   
 
 #### Reinforcement Learning
-1. Initialize agent and environment. citeturn5search0  
-2. Perform actions based on current policy. citeturn5search0  
-3. Receive reward feedback. citeturn5search0  
-4. Update policy using reward signal. citeturn5search0  
-5. Repeat until convergence. citeturn5search0  
+1. Initialize agent and environment.   
+2. Perform actions based on current policy.   
+3. Receive reward feedback.   
+4. Update policy using reward signal.   
+5. Repeat until convergence.   
 
 #### Examples
-- **Supervised Learning:** Image classification, spam detection, price prediction. citeturn20search0  
-- **Reinforcement Learning:** Game playing, robotics control, recommendation strategies with delayed rewards. citeturn5search0turn2search3  
+- **Supervised Learning:** Image classification, spam detection, price prediction.   
+- **Reinforcement Learning:** Game playing, robotics control, recommendation strategies with delayed rewards. turn2search3  
 
 ### Unsupervised Learning
 
@@ -104,16 +104,16 @@ Its massive connectivity gives the brain extraordinary computational power. cite
 
 ### Neural Networks and Artificial Neural Networks
 
-- Neural networks are inspired by biological brains. citeturn5search0  
-- Artificial neurons approximate real neurons. citeturn5search0  
-- ANNs are networks of artificial neurons. citeturn5search0  
-- ANNs are simplified models of brain functionality. citeturn5search0  
-- Practically, ANNs are parallel computational systems. citeturn5search0  
+- Neural networks are inspired by biological brains.   
+- Artificial neurons approximate real neurons.   
+- ANNs are networks of artificial neurons.   
+- ANNs are simplified models of brain functionality.   
+- Practically, ANNs are parallel computational systems.   
 
 #### Definitions
-- **Neural Networks (NNs):** Networks of neurons similar to those found in biological brains. citeturn5search0  
-- **Artificial Neurons:** Crude approximations of biological neurons, implemented as mathematical or software constructs. citeturn5search0  
-- **Artificial Neural Networks (ANNs):** Networks of artificial neurons that approximate certain functions of real brains. citeturn5search0  
+- **Neural Networks (NNs):** Networks of neurons similar to those found in biological brains.   
+- **Artificial Neurons:** Crude approximations of biological neurons, implemented as mathematical or software constructs.   
+- **Artificial Neural Networks (ANNs):** Networks of artificial neurons that approximate certain functions of real brains.   
 
 ### Biological vs Artificial Neurons
 
@@ -128,15 +128,15 @@ Its massive connectivity gives the brain extraordinary computational power. cite
   - 🔚 Axon terminals (output) citeturn7search2  
 
 #### Artificial Neurons
-- Artificial neurons replace synapses with **numerical inputs** citeturn5search0  
+- Artificial neurons replace synapses with **numerical inputs**   
 - Inputs can come from:
   - Other neurons
   - Sensors
   - Data features
-  - Variables citeturn5search0  
+  - Variables   
 - Core operations include:
   - ➕ Weighted sum (Σ)
-  - 📉 Activation / threshold function citeturn5search0  
+  - 📉 Activation / threshold function   
 
 #### Computational Power
 - The neocortex contains about **500 trillion synapses** operating **in parallel** citeturn8search0turn7search2  
@@ -153,30 +153,30 @@ Its massive connectivity gives the brain extraordinary computational power. cite
 - This adaptability is central to skill acquisition and cognition citeturn4search5  
 
 #### Artificial Neural Networks (ANNs)
-- ANNs are inspired by biological neural systems citeturn5search0  
-- They aim to approximate learning and decision-making citeturn5search0  
+- ANNs are inspired by biological neural systems   
+- They aim to approximate learning and decision-making   
 - While powerful, they are far less energy-efficient than the human brain citeturn7search1  
 - The neocortex remains a benchmark for efficient computation and learning citeturn7search1turn4search5  
 
 ### Artificial Neural Networks. Why?
 
 - 🧮 **Extremely powerful computational devices**  
-  - Turing-equivalent universal computers citeturn5search0  
+  - Turing-equivalent universal computers   
 - ⚡ **Massive parallelism**  
-  - Many simple units operate simultaneously, making computation efficient citeturn5search0  
+  - Many simple units operate simultaneously, making computation efficient   
 - 📚 **Learning and generalization**  
   - Learn directly from training data  
-  - No need for carefully handcrafted rules or designs citeturn20search0  
+  - No need for carefully handcrafted rules or designs   
 - 🛡️ **Fault-tolerant and noise-tolerant**  
-  - Performance degrades gracefully even with imperfect data or failures citeturn5search0  
+  - Performance degrades gracefully even with imperfect data or failures   
 - 🧠 **Beyond symbolic systems**  
-  - Can do everything a symbolic or logic-based system can, and more citeturn5search0  
+  - Can do everything a symbolic or logic-based system can, and more   
 - 📊 **Excellent with unstructured data**  
   - Particularly strong with:
     - 📝 Text  
     - 🖼️ Images  
     - 🔊 Audio  
-    - Other semi-structured data citeturn5search0  
+    - Other semi-structured data   
 
 ## Convolutional Neural Networks
 
@@ -557,7 +557,7 @@ T5 uses task prefixes (instructions) to unify workflows across tasks (e.g., “t
 
 ### GPT and Reinforcement Learning
 
-GPT models, built on deep learning, have revolutionised language understanding and generation by predicting text patterns with remarkable fluency. Reinforcement Learning (RL), on the other hand, empowers systems to learn through trial and error, optimising actions for long-term rewards. Together, they unlock new frontiers in adaptive, intelligent decision-making and human-like interactions. citeturn5search0turn1search7  
+GPT models, built on deep learning, have revolutionised language understanding and generation by predicting text patterns with remarkable fluency. Reinforcement Learning (RL), on the other hand, empowers systems to learn through trial and error, optimising actions for long-term rewards. Together, they unlock new frontiers in adaptive, intelligent decision-making and human-like interactions. turn1search7  
 
 ### Reinforcement Learning from Human Feedback (RLHF)
 
