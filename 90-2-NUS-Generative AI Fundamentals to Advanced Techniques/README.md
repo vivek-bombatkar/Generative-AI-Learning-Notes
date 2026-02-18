@@ -10,6 +10,7 @@
 - [Alignment, Reliability, and Knowledge Grounding](#alignment-reliability-and-knowledge-grounding)
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
 - [Useful Links](#useful-links)
+- [AI Learning Techniques](#ai-learning-techniques)
 
 
 
@@ -429,31 +430,56 @@ Encoder-decoder models power a variety of real-world applications including:
 
 
 # Multimodal and Generalist Models
+## Multimodal Models Overview
 
-### Multimodal models
+| Aspect | Description |
+|--------|------------|
+| Definition | Models designed to process and integrate multiple data modalities such as text, images, audio, and video |
+| Core Idea | Combine different input types to enhance contextual understanding and decision-making |
+| Architecture Pattern | Often uses separate architectures for different modalities with a fusion mechanism |
+| Goal | Produce richer, context-aware outputs by leveraging multiple sensory inputs |
 
-Multimodal models are designed to process multiple types of data, moving beyond the traditional text based inputs. These models integrate different modalities such as text, image, audio, and video, allowing AI to understand and generate more contextually rich outputs.
+---
 
-Instead of relying on a single data type, multimodal models combine multiple inputs to enhance their decision making and interpretation. To achieve this, separate architectures are often used for different data types.
+## Architectural Design Pattern
 
-Examples from the notes:
-- ViLBERT - 2 separate models for text and videos
-- Show & Tell - CNN based model for images, LSTM for text captioning
+| Component | Role |
+|------------|------|
+| CNN (Image Stream) | Extracts visual features from images |
+| Text Model (e.g., BiLSTM) | Processes textual data and captures sequential context |
+| Fusion Layer | Pools, concatenates, or applies co-attention across modalities |
+| Final Output Layer | Generates structured output using combined multimodal features |
 
-Clarification (added to preserve intent while tightening accuracy):
-- ViLBERT is a **two-stream** vision-and-language model with separate visual and textual streams that interact via co-attention; it is primarily presented for image+text settings but the same design pattern is often discussed in broader multimodal contexts.
+---
 
-Looking at the illustration (as described in the notes), different components work together:
-- CNN extracts features from an image
-- A separate model such as BiLSTM processes corresponding textual data
-- Outputs are then pooled or chained to form a final structured response, ensuring both image and text contribute to overall understanding
+## Example Models
 
-This fusion enables tasks such as automatic captioning, video analysis, and even speech to text with contextual awareness. Multimodal learning enhances AI's ability to interpret the world more like humans by integrating multiple sensory inputs.
+| Model | Architecture Style | Key Characteristic |
+|--------|--------------------|--------------------|
+| **ViLBERT** | Two-stream vision-language model | Separate visual and textual streams interacting via co-attention |
+| **Show & Tell** | CNN + LSTM | CNN extracts image features, LSTM generates captions |
 
-Applications mentioned:
-- Autonomous systems
-- Accessibility tools
-- Interactive AI assistance
+---
+
+## Capabilities Enabled by Fusion
+
+| Capability | Description |
+|-------------|------------|
+| Automatic Captioning | Generate text descriptions from images |
+| Video Analysis | Interpret visual sequences with contextual reasoning |
+| Speech-to-Text with Context | Combine audio input with language understanding |
+| Cross-Modal Reasoning | Link information across image and text domains |
+
+---
+
+## Application Areas
+
+| Domain | Examples |
+|--------|----------|
+| Autonomous Systems | Perception + decision integration |
+| Accessibility Tools | Image description for visually impaired users |
+| Interactive AI Assistants | Context-aware multimodal interactions |
+
 
 ### Gato
 
@@ -468,7 +494,81 @@ GATO has been trained across a wide range of applications, from chat bots and ga
 Its versatility represents a major shift from specialised AI systems towards scalable generalist AI models that can efficiently operate across multiple domains.
 
 
-## Useful Links
+# AI Learning Techniques
+
+## AI Learning Techniques Overview
+
+| Category | Learning Type | Core Idea | Example Techniques | Typical Applications |
+|-----------|--------------|-----------|--------------------|----------------------|
+| **AI Fundamentals** | Supervised Learning | Learn from labelled examples (X, Y) | Classification, Regression | Spam detection, Price prediction, Image classification |
+| **AI Fundamentals** | Unsupervised Learning | Learn structure without labels | Clustering, Anomaly Detection, Recommender Systems | Customer segmentation, Fraud detection |
+| **AI Fundamentals** | Reinforcement Learning (RL) | Learn by interacting with environment using rewards | Policy Learning, Reward Optimization | Robotics, Autonomous systems, Game-playing AI |
+| **Deep Learning** | Pre-Training | Large-scale training on broad datasets | Transformer Pretraining | Foundation models |
+| **Deep Learning** | Post-Training (RLHF, Fine-tuning) | Improve alignment and performance | RLHF, Instruction Tuning | Chatbots, GenAI systems |
+| **Generative AI (GenAI)** | Generative Modeling | Generate new content from learned patterns | GPT-style models | Content generation, Conversational AI |
+| **Agentic AI** | High-Autonomy Systems | AI systems that act independently | Planning + Tool use + Memory | Autonomous agents, Decision systems |
+
+
+## Learning Paradigms Comparison
+
+| Learning Paradigm | Learns From | Feedback Type | Autonomy Level | Key Characteristic |
+|-------------------|------------|---------------|----------------|--------------------|
+| Supervised Learning | Labelled data (X, Y) | Direct error feedback | Low | Predictive modeling |
+| Unsupervised Learning | Unlabelled data | No explicit feedback | Low | Pattern discovery |
+| Reinforcement Learning | Environment interaction | Reward and penalty | High | Sequential decision-making |
+
+## Generative AI and LLM Training Methods
+
+| Aspect | Description |
+|--------|------------|
+| Generative AI Category | Does not fit into a single learning paradigm. Learns probability distributions underlying training data. |
+| Learning Nature | Often considered unsupervised at core, as it models data distributions without explicit labels for every output. |
+| LLM Pre-Training | Relies primarily on supervised-style next-token prediction over large datasets. |
+| LLM Post-Training | Uses reinforcement learning techniques (e.g., RLHF) to improve alignment and helpfulness. |
+| Alignment Objective | Post-training integrates Generative AI and RL to address safety, factuality, and alignment challenges. |
+| Broader Goal | Moves AI systems toward more reliable, aligned, and general-purpose intelligence. |
+
+
+## Reinforcement Learning from Human Feedback - RLHF and Reward Model in LLM Alignment
+
+### Reward Model Concept
+
+| Component | Description |
+|------------|------------|
+| Prompt | User input given to the model (e.g., “What color is milk?”) |
+| Model Output | Generated response (e.g., “Milk is white.”) |
+| Reward Model | Evaluates how good the answer is relative to the prompt |
+| Score | Numerical value representing output quality and alignment |
+
+---
+
+## Why Post-Training is Needed
+
+| Stage | Explanation |
+|--------|------------|
+| Pre-Training | Produces a base LLM trained on large datasets using next-token prediction |
+| Limitation | Model lacks refinement, alignment, and may produce hallucinations |
+| Traditional Fine-Tuning | Updates model weights using supervised datasets but is expensive for large models |
+| Persistent Challenge | Even after fine-tuning, hallucinations and misalignment can remain |
+
+---
+
+## Reinforcement Learning from Human Feedback (RLHF)
+
+| Aspect | Description |
+|---------|------------|
+| Objective | Align pre-trained model outputs with human values |
+| Method | Human reviewers rank multiple model outputs |
+| Reward Model Training | A separate model learns to predict human preference scores |
+| Policy Optimization | Main LLM is updated to maximize reward scores |
+| Outcome | More helpful, safer, and better-aligned responses |
+
+
+
+
+
+
+# Useful Links
 - https://paperswithcode.com/method/gpt
 - https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-models
 - https://arxiv.org/abs/1810.04805
