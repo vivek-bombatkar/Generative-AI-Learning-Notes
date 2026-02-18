@@ -1,6 +1,7 @@
 # Generative AI Learning Notes
 ### My Learning Notes from [National University of Singapore generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
 
+---
 ## Table of Contents
 - [Learning Paradigms in Machine Learning](#learning-paradigms-in-machine-learning)
 - [From Brains to Artificial Neural Networks](#from-brains-to-artificial-neural-networks)
@@ -9,10 +10,11 @@
 - [Transformer Model Families](#transformer-model-families)
 - [Alignment, Reliability, and Knowledge Grounding](#alignment-reliability-and-knowledge-grounding)
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
-- [Useful Links](#useful-links)
 - [AI Learning Techniques](#ai-learning-techniques)
-
-
+- [Reinforcement Learning for Generative AI](#Reinforcement-Learning-for-Generative-AI)
+- 
+- [Useful Links](#useful-links)
+---
 
 # Learning Paradigms in Machine Learning
 
@@ -563,11 +565,155 @@ Its versatility represents a major shift from specialised AI systems towards sca
 | Policy Optimization | Main LLM is updated to maximize reward scores |
 | Outcome | More helpful, safer, and better-aligned responses |
 
+---
+
+# Reinforcement Learning for Generative AI
+
+
+## Markov Decision Process (MDP) and Optimal Policy – Summary
+
+An MDP is a mathematical framework for **sequential decision-making** where actions influence both immediate and future rewards.
+
+| Concept | Role in RL |
+|----------|-----------|
+| MDP | Defines environment dynamics |
+| Policy | Defines agent behavior |
+| Bellman Equation | Links present and future values |
+| Bootstrapping | Computes values iteratively |
+| Optimal Policy | Maximizes long-term rewards |
+
+
+
+Core Components of an MDP
+
+| Component | Description |
+|------------|------------|
+| States (S) | Possible situations the agent can be in (e.g., Hotel, Area1–Area4 in the ski example) |
+| Actions (A) | Choices available in each state (e.g., ski, take lift) |
+| Rewards (R) | Immediate reward received after transitioning to a new state |
+| Transition Probabilities (Pss’) | Probability of moving from state s to state s’ |
+| Discount Factor (γ) | Controls importance of future rewards |
+
+##  Policy
+
+| Concept | Explanation |
+|----------|------------|
+| Policy (π) | A mapping from states to actions |
+| Deterministic Policy | Always chooses the same action in a state |
+| Stochastic Policy | Chooses actions with certain probabilities |
+
+## Model-Based vs Model-Free Learning 
+
+| Approach | Assumption | How It Works | Limitation |
+|-----------|------------|--------------|------------|
+| Model-Based (Dynamic Programming) | Full knowledge of transition probabilities (Pss’) | Computes optimal policy analytically | Unrealistic in real-world settings |
+| Model-Free | No knowledge of transition probabilities | Learns directly through interaction | Requires exploration and experience |
+
+Dynamic Programming assumes the environment is fully known (Page 1).  
+Model-Free methods learn via trial and error.
+
+## MC vs TD Comparison
+
+| Feature | Monte Carlo | Temporal Difference |
+|----------|-------------|--------------------|
+| Requires Terminal State | Yes | No |
+| Bootstrapping | No | Yes |
+| Update Timing | After full episode | After every step |
+| Bias | Low | Slightly higher |
+| Variance | High | Lower |
+| Practical Use | Episodic tasks | Continuous environments |
+
+| Concept | Role in RL |
+|----------|------------|
+| Monte Carlo | Learn from full experience |
+| Temporal Difference | Learn from partial experience |
+| Bootstrapping | Core mechanism in TD |
+| Exploration | Necessary for optimal learning |
+
+## On-Policy vs Off-Policy Learning
+
+| Concept | On-Policy | Off-Policy |
+|-----------|------------|------------|
+| Target Policy (π) | Policy being evaluated and improved | Policy being learned |
+| Behaviour Policy (b) | Same as target policy | Different from target policy |
+| Exploration | Limited to current policy | Can explore using separate exploratory policy |
+| Example | SARSA | Q-Learning |
+
+Q-Learning is **off-policy**.  
+It learns the optimal policy regardless of how actions are chosen.
+
+| Concept | Explanation |
+|----------|------------|
+| Q(s,a) | Value of taking action a in state s |
+| Goal | Learn optimal Q-values |
+| Policy Derived | Deterministic optimal policy |
+| Key Feature | Uses max Q-value of next state |
+
+Q-learning updates Q-values using:
+- Current estimate
+- Observed reward
+- Best future estimated reward
+
+| Algorithm | Type | Requires Model? |
+|------------|------|----------------|
+| Dynamic Programming | Model-based | Yes |
+| Monte Carlo | Model-free | No |
+| TD Learning | Model-free | No |
+| Q-Learning | Model-free, Off-policy | No |
+
+## RLHF in One Table
+
+| Stage | What Happens |
+|--------|-------------|
+| Pre-training | Learn language patterns |
+| Instruction tuning | Learn task-following behaviour |
+| Reward model training | Learn human preference ranking |
+| PPO fine-tuning | Align model to reward model |
+| User feedback | Continuous improvement |
+
+### RLHF =  Human preferences → Reward model → PPO updates → Aligned LLM
+
+## Alignment Workflow Comparison
+
+| Stage | RLHF | PPO | DPO | Constitutional AI |
+|--------|------|------|------|------------------|
+| 1. Pre-training | Base LLM trained | Same | Same | Same |
+| 2. Instruction Tuning | Yes | Yes | Yes | Yes |
+| 3. Human Feedback | Rank responses | Rank responses | Rank responses | Draft constitution |
+| 4. Reward Model | Trained | Used | Not required | Not required |
+| 5. Optimisation | RL with PPO | Clipped PPO objective | Direct preference loss | Self-evaluation against rules |
+| 6. Policy Update | Via RL loop | Via RL loop | Via gradient descent | Via rule-guided refinement |
+
+## Conceptual Differences
+
+| Method | Core Philosophy |
+|---------|----------------|
+| RLHF | Learn human preferences through reward modelling + reinforcement learning |
+| PPO | Stabilise policy updates during RL training |
+| DPO | Directly optimise preferred outputs without RL |
+| Constitutional AI | Align model using explicit ethical principles |
+
+## When to Use What?
+
+| Scenario | Recommended Method |
+|------------|------------------|
+| Large-scale production LLM | RLHF + PPO |
+| Lower-cost alignment | DPO |
+| Safety-first systems | Constitutional AI |
+| Research on stable optimisation | PPO |
+| Simplified alignment pipeline | DPO |
+
+| Method | Strength | Weakness |
+|---------|----------|-----------|
+| RLHF | Strong human alignment | Expensive & complex |
+| PPO | Stable RL updates | Still RL-dependent |
+| DPO | Simpler & efficient | Still needs preference data |
+| Constitutional AI | Safety-oriented | Limited flexibility |
 
 
 
 
-
+---
 # Useful Links
 - https://paperswithcode.com/method/gpt
 - https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-models
