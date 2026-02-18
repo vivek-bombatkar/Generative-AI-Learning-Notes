@@ -1,5 +1,5 @@
-# Generative AI & Deep Learning Notes
-### My Learning Notes from [NUS generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
+# Generative AI Learning Notes
+### My Learning Notes from [National University of Singapore generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
 
 ## Table of Contents
 - [Learning Paradigms in Machine Learning](#learning-paradigms-in-machine-learning)
