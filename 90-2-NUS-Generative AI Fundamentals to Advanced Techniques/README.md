@@ -128,6 +128,13 @@ Its massive connectivity gives the brain extraordinary computational power.
 | Beyond symbolic systems | Can do everything a symbolic or logic-based system can, and more |
 | Excellent with unstructured data | Particularly strong with text, images, audio, and other semi-structured data |
 
+### Links:
+https://pytorch.org/
+https://machinelearningmastery.com/regression-tutorial-keras-deep-learning-library-python/
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+https://keras.io/
+https://www.tensorflow.org/tutorials/images/cnn
+https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 
 # Convolutional Neural Networks
 
@@ -200,7 +207,19 @@ Its massive connectivity gives the brain extraordinary computational power.
 | Lack of Interpretability | Acts as a black-box model. Difficult to understand or debug decisions. |
 | Overfitting Risk | Without proper regularisation, models may memorise training data. |
 | Sensitivity to Hyperparameters | Performance depends heavily on architecture, learning rate, and other tuning choices. |
-``
+
+
+
+### Links:
+https://huggingface.co/docs/huggingface_hub/v0.23.1/quick-start
+https://discuss.huggingface.co/t/google-colab-hub-login/21853
+https://huggingface.co/docs/transformers/en/model_doc/bert
+https://www.tensorflow.org/text/tutorials/classify_text_with_bert
+https://www.geeksforgeeks.org/explanation-of-bert-model-nlp/
+https://bert-embedding.readthedocs.io/en/latest/
+https://platform.openai.com/docs/api-reference/introduction
+https://platform.openai.com/docs/concepts
+https://docs.gptr.dev/docs/examples/examples
 
 
 # Transformers and Attention Mechanisms
@@ -407,6 +426,16 @@ Encoder-decoder models power a variety of real-world applications including:
 | **BART** | Bidirectional and Auto-Regressive Transformer | Encoder-Decoder | Denoising Autoencoder | Token masking, Token deletion, Span corruption (text infilling) | Combines bidirectional understanding with autoregressive generation. Robust to noisy or incomplete inputs. | Summarisation, Paraphrasing, Translation, Text completion |
 | **PEGASUS** | Pre-training with Extracted Gap-sentences for Abstractive Summarisation | Encoder-Decoder | Gap Sentence Generation (GSG) | Masks entire important sentences instead of tokens | Optimised specifically for abstractive summarisation. Minimal fine-tuning needed. | Document summarisation |
 | **T5** | Text-to-Text Transfer Transformer | Encoder-Decoder | Text-to-text unified framework | Span corruption with task prefixes | Unified approach for multiple NLP tasks via instruction-style prompts. Strong transfer learning capability. | Translation, Summarisation, Question Answering |
+
+
+### Link:
+https://www.geeksforgeeks.org/explanation-of-bert-model-nlp/
+https://paperswithcode.com/method/gpt
+https://30dayscoding.com/blog/understanding-the-architecture-of-gpt-models
+https://arxiv.org/abs/1810.04805
+https://huggingface.co/docs/transformers/en/model_doc/distilbert
+https://github.com/huggingface/transformers
+https://huggingface.co/docs/transformers/en/model_doc/bart
 
 
 # Alignment, Reliability, and Knowledge Grounding
@@ -711,10 +740,10 @@ Q-learning updates Q-values using:
 | Constitutional AI | Safety-oriented | Limited flexibility |
 
 ### Links 
-- https://www.ibm.com/docs/en/dbaoc?topic=flow-adding-generative-ai-task-serviceLinks to an external site.
-- https://www.superannotate.com/blog/rlhf-for-llmLinks to an external site.
-- https://www.turing.com/resources/rlhf-in-llmsLinks to an external site.
-- https://www.superannotate.com/blog/llm-fine-tuningLinks to an external site.
+- https://www.ibm.com/docs/en/dbaoc?topic=flow-adding-generative-ai-task-service
+- https://www.superannotate.com/blog/rlhf-for-llm
+- https://www.turing.com/resources/rlhf-in-llms
+- https://www.superannotate.com/blog/llm-fine-tuning
 - https://aws.amazon.com/blogs/machine-learning/llm-continuous-self-instruct-fine-tuning-framework-powered-by-a-compound-ai-system-on-amazon-sagemaker/
 
 
