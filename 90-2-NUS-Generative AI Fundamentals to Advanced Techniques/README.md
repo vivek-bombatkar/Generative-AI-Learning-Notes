@@ -710,7 +710,12 @@ Q-learning updates Q-values using:
 | DPO | Simpler & efficient | Still needs preference data |
 | Constitutional AI | Safety-oriented | Limited flexibility |
 
-
+### Links 
+- https://www.ibm.com/docs/en/dbaoc?topic=flow-adding-generative-ai-task-serviceLinks to an external site.
+- https://www.superannotate.com/blog/rlhf-for-llmLinks to an external site.
+- https://www.turing.com/resources/rlhf-in-llmsLinks to an external site.
+- https://www.superannotate.com/blog/llm-fine-tuningLinks to an external site.
+- https://aws.amazon.com/blogs/machine-learning/llm-continuous-self-instruct-fine-tuning-framework-powered-by-a-compound-ai-system-on-amazon-sagemaker/
 
 
 ---
