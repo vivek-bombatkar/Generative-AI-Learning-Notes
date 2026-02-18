@@ -713,7 +713,7 @@ Q-learning updates Q-values using:
 
 
 ---
-# 📚 Useful Links – Organized by Topic
+# Useful Links
 
 ---
 
