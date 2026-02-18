@@ -1,5 +1,5 @@
 # Generative AI Learning Notes
-### My Learning Notes from [National University of Singapore generative-ai-fundamentals-to-advanced-techniques-programme](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
+### My Learning Notes from [National University of Singapore | Generative AI: Fundamentals to Advanced Techniques](https://nus.comp.emeritus.org/generative-ai-fundamentals-to-advanced-techniques-programme)
 
 ---
 ## Table of Contents
