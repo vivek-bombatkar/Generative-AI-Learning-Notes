@@ -15,18 +15,18 @@
 
 # Learning Paradigms in Machine Learning
 
-## Supervised vs Reinforcement vs Unsupervised Learning
+## Supervised vs Unsupervised vs Reinforcement Learning
 
-| Aspect | Supervised Learning | Reinforcement Learning (RL) | Unsupervised Learning |
-|--------|--------------------|-----------------------------|-----------------------|
-| Definition | Learns from labelled input-output pairs with direct error feedback | Agent learns by interacting with an environment using rewards and penalties | Learns patterns and structures from unlabelled data |
-| Data Type | Labelled data | Interaction data (state, action, reward) | Unlabelled data |
-| Objective | Minimize prediction error (loss function) | Maximize cumulative long-term reward | Discover hidden structure or relationships |
-| Feedback Signal | Immediate and explicit (true label known) | Delayed and reward-based | No explicit feedback |
-| Training Process | Train model on labelled data and optimize loss | Agent acts, receives reward, updates policy iteratively | Model identifies clusters, representations, or distributions |
-| Decision Nature | Predictive | Sequential decision-making | Exploratory pattern discovery |
-| Typical Algorithms | Linear Regression, Logistic Regression, Neural Networks | Q-Learning, Policy Gradient, Deep RL | K-Means, PCA, Autoencoders, GANs |
-| Example Use Cases | Image classification, Spam detection, Price prediction | Game playing, Robotics control, Recommendation with delayed rewards | Customer segmentation, Fraud detection, Dimensionality reduction |
+| Aspect | Supervised Learning | Unsupervised Learning | Reinforcement Learning (RL) |
+|--------|--------------------|-----------------------|-----------------------------|
+| Definition | Learns from labelled input-output pairs with direct error feedback | Learns patterns and structures from unlabelled data | Agent learns by interacting with an environment using rewards and penalties |
+| Data Type | Labelled data | Unlabelled data | Interaction data (state, action, reward) |
+| Objective | Minimize prediction error (loss function) | Discover hidden structure or relationships | Maximize cumulative long-term reward |
+| Feedback Signal | Immediate and explicit (true label known) | No explicit feedback | Delayed and reward-based |
+| Training Process | Train model on labelled data and optimize loss | Model identifies clusters, representations, or distributions | Agent acts, receives reward, updates policy iteratively |
+| Decision Nature | Predictive | Exploratory pattern discovery | Sequential decision-making |
+| Typical Algorithms | Linear Regression, Logistic Regression, Neural Networks | K-Means, PCA, Autoencoders, GANs | Q-Learning, Policy Gradient, Deep RL |
+| Example Use Cases | Image classification, Spam detection, Price prediction | Customer segmentation, Fraud detection, Dimensionality reduction | Game playing, Robotics control, Recommendation with delayed rewards |
 
 
 # From Brains to Artificial Neural Networks
