@@ -15,38 +15,19 @@
 
 # Learning Paradigms in Machine Learning
 
-## Reinforcement Learning vs Supervised Learning
+## Supervised vs Reinforcement vs Unsupervised Learning
 
-| Aspect | Supervised Learning | Reinforcement Learning (RL) |
-|---|---|---|
-| Definition | A learning paradigm where a model is trained on labelled input-output pairs and receives direct feedback on errors. | A learning paradigm where an agent learns by interacting with an environment using rewards and penalties. |
-| Training steps | 1. Collect labelled data.<br>2. Split into training and validation sets.<br>3. Train model to minimize loss.<br>4. Evaluate performance. | 1. Initialize agent and environment.<br>2. Perform actions based on current policy.<br>3. Receive reward feedback.<br>4. Update policy using reward signal.<br>5. Repeat until convergence. |
-| Examples | Image classification, spam detection, price prediction. | Game playing, robotics control, recommendation strategies with delayed rewards. |
+| Aspect | Supervised Learning | Reinforcement Learning (RL) | Unsupervised Learning |
+|--------|--------------------|-----------------------------|-----------------------|
+| Definition | Learns from labelled input-output pairs with direct error feedback | Agent learns by interacting with an environment using rewards and penalties | Learns patterns and structures from unlabelled data |
+| Data Type | Labelled data | Interaction data (state, action, reward) | Unlabelled data |
+| Objective | Minimize prediction error (loss function) | Maximize cumulative long-term reward | Discover hidden structure or relationships |
+| Feedback Signal | Immediate and explicit (true label known) | Delayed and reward-based | No explicit feedback |
+| Training Process | Train model on labelled data and optimize loss | Agent acts, receives reward, updates policy iteratively | Model identifies clusters, representations, or distributions |
+| Decision Nature | Predictive | Sequential decision-making | Exploratory pattern discovery |
+| Typical Algorithms | Linear Regression, Logistic Regression, Neural Networks | Q-Learning, Policy Gradient, Deep RL | K-Means, PCA, Autoencoders, GANs |
+| Example Use Cases | Image classification, Spam detection, Price prediction | Game playing, Robotics control, Recommendation with delayed rewards | Customer segmentation, Fraud detection, Dimensionality reduction |
 
-
-## Unsupervised Learning
-
-- **Unsupervised Learning:** A branch of machine learning where models learn patterns and relationships from unlabelled data without predefined outputs.
-
-#### Examples
-
-##### 1. Clustering Problems
-- Customer segmentation
-- Image segmentation
-
-##### 2. Dimensionality Reduction Problems
-- Principal Component Analysis (PCA)
-- t-SNE
-
-##### 3. Anomaly Detection
-- Fraud detection
-
-##### 4. Generative Models (partly unsupervised)
-- Autoencoders
-- GANs (Generative Adversarial Networks)
-
-##### 5. Market Basket Analysis
-- Identifying frequently co-occurring items
 
 # From Brains to Artificial Neural Networks
 
@@ -149,35 +130,53 @@ Its massive connectivity gives the brain extraordinary computational power.
 
 ### Deep Convolutional Neural Networks (CNNs)
 
-#### Definition
-**Deep Convolutional Neural Networks (CNNs)** are a specialized type of neural network designed to process **structured, grid-like data**, especially **images**.
+| Section | Description |
+|----------|------------|
+| **Definition** | Specialized neural networks designed for structured, grid-like data such as images |
+| **Primary Strength** | Efficient processing of spatial data with preserved local relationships |
+| **Inspiration** | Modeled after the human visual system |
 
-#### Key characteristics
-- Designed for **spatial data** arranged in grids
-- Combine:
-  - **Convolutional layers** for feature extraction
-  - **Fully connected layers** for decision-making
-- Inspired by the **human visual system**
-- Highly effective when **spatial hierarchies** matter
 
-#### Core building blocks
-- **Input**
-- **Convolutional Layer**. Extracts local features (edges, textures)
-- **Pooling Layer**. Reduces spatial size and computation
-- **Activation Function**. Adds non-linearity
-- **Fully Connected Layer**. Performs classification or prediction
-- **Output**
+### Key Characteristics
 
-#### Why CNNs work well
-- Learn **hierarchical features**. from simple edges to complex shapes
-- Preserve **spatial relationships** in data
-- Particularly strong for **vision-based tasks**
+| Characteristic | Explanation |
+|----------------|-------------|
+| Spatial Awareness | Designed for data arranged in 2D or multi-dimensional grids |
+| Feature Extraction | Uses convolutional layers to automatically learn patterns |
+| Decision Making | Fully connected layers perform classification or regression |
+| Hierarchical Learning | Learns features from simple edges to complex structures |
 
-#### Typical use cases
-- Image classification
-- Object detection
-- Image segmentation
-- Visual pattern recognition
+
+### Core Building Blocks
+
+| Component | Role |
+|------------|------|
+| Input | Raw image or grid-structured data |
+| Convolutional Layer | Extracts local features such as edges and textures |
+| Pooling Layer | Reduces spatial dimensions and computational cost |
+| Activation Function | Introduces non-linearity (e.g., ReLU) |
+| Fully Connected Layer | Combines features for final prediction |
+| Output | Final classification or regression result |
+
+
+### Why CNNs Work Well
+
+| Reason | Explanation |
+|---------|-------------|
+| Hierarchical Feature Learning | Builds complex representations from simple patterns |
+| Spatial Relationship Preservation | Maintains locality information within images |
+| Parameter Efficiency | Shares weights across spatial regions |
+
+
+### Typical Use Cases
+
+| Application Area |
+|------------------|
+| Image classification |
+| Object detection |
+| Image segmentation |
+| Visual pattern recognition |
+
 
 #### Advantages of CNNs
 | Advantage | Description |
@@ -239,19 +238,16 @@ To understand attention, everything revolves around three components:
 - Handles **long-range dependencies**
 - Essential for understanding meaning in complex sentences
 
-## Multi-Head Attention
+### Multi-Head Attention Overview
 
-#### What is Multi-Head Attention?
-- Instead of one attention mechanism, the model uses **multiple heads**
-- Each head attends to **different aspects** of the sequence
-
-#### How It Works
-- Input is split into multiple Q, K, V sets
-- Each head computes attention **independently**
-- Outputs are:
-  - Concatenated
-  - Passed through a linear layer  
-Result. richer and more expressive representations
+| Section | Description |
+|----------|------------|
+| **What It Is** | Uses multiple parallel attention heads instead of a single attention mechanism |
+| **Core Idea** | Each head attends to different aspects or relationships within the sequence |
+| **Input Processing** | Input embeddings are projected into multiple sets of **Q, K, V** vectors |
+| **Attention Computation** | Each head computes scaled dot-product attention independently |
+| **Output Aggregation** | Head outputs are concatenated and passed through a final linear layer |
+| **Result** | Produces richer, more expressive, and context-aware representations |
 
 ### Feedforward Networks (FFN)
 
@@ -303,55 +299,32 @@ Together, these components allow transformers to:
 - Computational needs have grown **exponentially**
 - Hardware advances are critical for progress
 
-## Transformer Variants
-- Transformers excel at sequential data
-- Variants optimise performance for specific tasks
+## Transformer Variants Comparison
 
-#### Hybrid Architectures
+### Hybrid Architectures
 
-##### CNN + Transformer
-- Common in computer vision
-- CNN captures **local spatial features**
-- Transformer captures **long-range dependencies**
-- Used in:
-  - Vision Transformers (ViTs)
-  - ResNet hybrids
+| Variant | Core Idea | What Each Component Does | Benefits | Common Applications |
+|----------|-----------|--------------------------|-----------|--------------------|
+| **CNN + Transformer** | Combine local feature extraction with global context modeling | CNN captures local spatial features. Transformer captures long-range dependencies. | Strong performance in vision tasks. Efficient feature hierarchy learning. | Vision Transformers (ViTs), ResNet hybrids |
+| **RNN + Transformer** | Combine sequential memory with global attention | RNN handles local sequential dependencies. Transformer models global context. | Improved modeling of temporal data. Better long-context reasoning. | Speech recognition, Time-series forecasting |
 
-##### RNN + Transformer
-- Useful for:
-  - Speech recognition
-  - Time-series forecasting
-- RNN handles local sequences
-- Transformer handles global context
+**Overall Benefits of Hybrid Models**
+- Reduced computational cost  
+- Better efficiency and scalability  
+- Strong performance on complex tasks  
 
-##### Benefits
-- Reduced computational cost
-- Better efficiency and scalability
-- Strong performance on complex tasks
+---
 
-#### Efficient Transformers (Long Sequences)
-- Standard transformers scale **quadratically** with sequence length due to self-attention
-- Problematic for long documents
-- Sparse and efficient variants address this
+### Efficient Transformers for Long Sequences
 
-##### Longformer
-- Uses attention patterns combining local + global information
-- Scales more linearly for long documents
-- Ideal for:
-  - Document-level QA
-  - Summarisation
+| Model | Core Technique | How It Improves Efficiency | Best Use Cases |
+|--------|----------------|---------------------------|----------------|
+| **Longformer** | Local + global sparse attention | Reduces quadratic attention cost for long documents | Document-level QA, Summarisation |
+| **Linformer** | Low-rank attention approximation | Projects keys and values to lower dimensions, reducing memory and compute | Long-sequence NLP tasks |
+| **Reformer** | LSH attention + reversible layers | Uses locality-sensitive hashing for sparse attention and memory-efficient backpropagation | Memory-constrained long-sequence processing |
 
-##### Linformer
-- Approximates attention via low-rank structure
-- Reduces memory and inference cost for long sequences
-
-##### Reformer
-- Optimised for memory efficiency
-- Uses locality-sensitive hashing (LSH) attention and reversible layers
 
 # Transformer Model Families
-
-### BERT vs GPT vs T5
 
 ### BERT vs GPT vs T5 Comparison
 
@@ -369,15 +342,19 @@ Together, these components allow transformers to:
 - **Dimensionality cost:** common configurations include hidden sizes like **768** (BERT-base), which affects memory and compute.
 - **No true free-form generation:** BERT is trained with a masked prediction objective (and NSP in the original version), so it excels at understanding/representation learning rather than left-to-right generation.
 
-#### Variants mentioned in the notes and discussion
-- **RoBERTa:** improved BERT pretraining by changing key training choices (for example, removing NSP and using dynamic masking and more data/compute).
-- **ELECTRA:** replaces masked-token prediction with **replaced token detection** (discriminator predicts whether a token was replaced by a generator).
-- **DistilBERT:** uses knowledge distillation to create a smaller, faster model while preserving much of BERT’s performance.
-- **ALBERT:** reduces parameters (e.g., factorized embeddings and parameter sharing) to improve efficiency.
-- **SpanBERT:** masks contiguous spans and trains objectives tailored to span representations.
-- **CodeBERT:** pre-trained for natural language + programming language tasks (bimodal NL-PL).
+### BERT Variants Comparison
 
-## GPT models and how ChatGPT works
+| Model | Key Idea | Training Modification | Primary Benefit | Typical Use Cases |
+|--------|----------|----------------------|------------------|-------------------|
+| **RoBERTa** | Robustly Optimized BERT Approach | Removes NSP, uses dynamic masking, larger data and compute | Stronger performance through improved pretraining strategy | Text classification, QA, NLP benchmarks |
+| **ELECTRA** | Efficient pretraining via discriminator | Replaced Token Detection instead of masked-token prediction | More sample-efficient training | General NLP tasks with lower compute cost |
+| **DistilBERT** | Smaller distilled BERT | Knowledge distillation from larger BERT model | Faster, lighter, reduced memory usage | Real-time applications, edge deployment |
+| **ALBERT** | Parameter-efficient BERT | Factorized embeddings, parameter sharing | Fewer parameters, improved efficiency | Large-scale NLP tasks with limited memory |
+| **SpanBERT** | Span-focused masking | Masks contiguous spans and trains span-level objectives | Better span representations | Question answering, coreference resolution |
+| **CodeBERT** | Bimodal NL-PL model | Pretrained on natural language and programming language data | Strong understanding of code + text | Code search, code generation, documentation tasks |
+
+
+# GPT models and how ChatGPT works
 
 #### Model Scale Comparison
 
@@ -420,125 +397,38 @@ Encoder-decoder models power a variety of real-world applications including:
 - Text summarisation, extracting the key points while preserving the meaning
 - Caption generation, generating textual descriptions for images or videos
 
-#### BART
-BART (Bidirectional and Auto-Regressive Transformer) is a hybrid model that integrates the strengths of both BERT and GPT, making it highly effective for tasks requiring text reconstruction and controlled generation.
+### BART vs PEGASUS vs T5 Comparison
 
-- It employs a bidirectional encoding process (similar to BERT) for comprehensive contextual understanding.
-- It uses denoising objectives such as span corruption / text infilling (replacing spans with a single mask token), forcing reconstruction of phrases while maintaining coherence.
-- On the decoding side, BART adopts autoregressive generation (similar to GPT), where tokens are generated one at a time while conditioning on the encoded input.
+| Model | Full Form | Architecture | Pre-training Strategy | Masking / Corruption Method | Strengths | Best Use Cases |
+|--------|------------|--------------|----------------------|-----------------------------|------------|----------------|
+| **BART** | Bidirectional and Auto-Regressive Transformer | Encoder-Decoder | Denoising Autoencoder | Token masking, Token deletion, Span corruption (text infilling) | Combines bidirectional understanding with autoregressive generation. Robust to noisy or incomplete inputs. | Summarisation, Paraphrasing, Translation, Text completion |
+| **PEGASUS** | Pre-training with Extracted Gap-sentences for Abstractive Summarisation | Encoder-Decoder | Gap Sentence Generation (GSG) | Masks entire important sentences instead of tokens | Optimised specifically for abstractive summarisation. Minimal fine-tuning needed. | Document summarisation |
+| **T5** | Text-to-Text Transfer Transformer | Encoder-Decoder | Text-to-text unified framework | Span corruption with task prefixes | Unified approach for multiple NLP tasks via instruction-style prompts. Strong transfer learning capability. | Translation, Summarisation, Question Answering |
 
-##### BART’s Denoising Process
-BART employs a denoising autoencoder approach, where input data is deliberately corrupted before being passed through the model.
 
-Noise-insertion techniques described in the notes:
-- Token masking replaces random words with a special [MASK] token.
-- Token deletion removes entire words from the sequence.
-- Text infilling (span corruption) replaces entire spans of text with a single [MASK] token.
+# Alignment, Reliability, and Knowledge Grounding
 
-This training strategy makes BART robust to noisy or incomplete inputs (e.g., imperfect formatting or missing spans) and supports tasks like summarisation, paraphrasing, translation, and text completion.
+### GPT, RLHF, RAG, ZSL, and Temperature Comparison
 
-#### PEGASUS
-PEGASUS (Pre-training with Extracted Gap-sentences for Abstractive Summarisation) is specifically designed to enhance text summarisation by masking entire sentences rather than individual tokens during pretraining.
+| Concept | What It Is | Core Mechanism | Why It Matters | Limitations |
+|----------|------------|---------------|----------------|-------------|
+| **Reinforcement Learning (RL)** | Learning paradigm based on trial and error with rewards | Agent takes actions, receives rewards, optimises long-term return | Enables adaptive and goal-oriented behaviour | Requires well-defined reward signals |
+| **RLHF** | Reinforcement Learning from Human Feedback applied to GPT | Uses a reward model trained on human preference rankings to fine-tune outputs | Improves helpfulness, safety, and alignment with human expectations | Still limited by training data and human bias |
+| **RAG** | Retrieval-Augmented Generation | Retrieves relevant external documents and injects them into model context | Improves factual accuracy, reduces hallucinations, enables up-to-date answers | Depends on retrieval quality and document relevance |
+| **Zero-Shot Learning (ZSL)** | Performing tasks without task-specific fine-tuning | Relies on pretraining knowledge and prompt instructions | Enables flexibility and fast deployment for new tasks | May lack task-specific precision |
+| **Temperature** | Inference-time parameter controlling randomness | Scales logits before softmax to adjust probability distribution | Balances creativity vs determinism in generated text | Too high reduces coherence, too low reduces diversity |
 
-Key points from the notes:
-- Entire sentences (instead of tokens) are masked during pretraining.
-- Sentences may be randomly identified, though the method focuses on removing “important” sentences (gap sentence generation).
-- These are identified to be ones with high similarity to the rest of the document (intuitively encouraging summary-like targets).
-
-PEGASUS achieves strong summarisation performance and can require minimal fine-tuning for high-quality abstractive summaries.
-
-#### T5
-T5 (Text-to-Text Transfer Transformer) reformulates all NLP tasks into a text-to-text format, using an encoder-decoder architecture for tasks like translation, summarisation, and Q&A.
-
-Text to Text
-- Indicative of the types of input and output to be expected
-- Encoder model used to get information for input text
-- Decoder model used to generate output text
-
-Transfer Transformer
-- Transformer capable of employing transfer learning
-- Allows for multiple NLP tasks to be accomplished by the model:
-  - Translation
-  - Summarisation
-  - Q&A
-
-T5 uses task prefixes (instructions) to unify workflows across tasks (e.g., “translate ...”, “summarize ...”).
-
-## Alignment, Reliability, and Knowledge Grounding
-
-### GPT and Reinforcement Learning
-
-GPT models, built on deep learning, have revolutionised language understanding and generation by predicting text patterns with remarkable fluency. Reinforcement Learning (RL), on the other hand, empowers systems to learn through trial and error, optimising actions for long-term rewards. Together, they unlock new frontiers in adaptive, intelligent decision-making and human-like interactions.
-
-### Reinforcement Learning from Human Feedback (RLHF)
-
-Reinforcement Learning from Human Feedback (RLHF) enhances GPT’s ability to generate not just human-like text but also reliable and contextually appropriate responses.
-
-Why RLHF is used (as captured in the notes and discussion):
-- GPT can produce fluent language, but a pure Transformer architecture does not *inherently* verify factual accuracy or suitability of outputs.
-- Example (preserved): “Under Augustus, the Roman Empire came to [MASK]” — GPT alone may not “know” which completion is historically correct without grounding or reliable internal knowledge.
-
-Typical RLHF-style pipeline:
-- A model is fine-tuned using a **reward model** (often a transformer trained on human preference rankings) that prioritizes more useful outputs.
-- Human reviewers evaluate and correct a subset of responses, reinforcing high-quality and informative text generation.
-
-### Retrieval-Augmented Generation (RAG)
-
-Retrieval-Augmented Generation (RAG) enhances GPT by integrating external knowledge sources, addressing its limitations with fixed training data.
-
-Key points (preserved and clarified):
-- ChatGPT generates responses off fixed training data.
-- Without external sources, it struggles with real-time updates, niche topics, or retrieving specific factual details.
-- RAG retrieves relevant documents or data (e.g., knowledge bases, web snapshots, or indexed corpora), feeding them into the model as additional context for response generation.
-- This approach improves accuracy, reduces hallucinations, and enables up-to-date, domain-specific answers.
-- Combining GPT-style models with retrieval creates more reliable, informed, and adaptable AI systems for business and research applications.
-
-### Zero-Shot Learning (ZSL)
-
-Zero-Shot Learning (ZSL) enables GPT to perform tasks without additional training, relying solely on its extensive pretraining. Instead of requiring labeled examples or fine-tuning:
-
-- GPT leverages its extensive pre-training to perform tasks without additional training, generating relevant outputs directly from prompt instruction.
-- Enhanced flexibility: allows adaptation to new tasks without extra fine-tuning.
-- Streamlined workflow: reduces the need for task-specific fine-tuning.
-- Can be more efficient for real-time applications—enhancing overall productivity.
-
-### Model Temperature
-
-Temperature is a parameter that controls the randomness of token selection during inference (commonly described as scaling logits before softmax).
-
-Notes (preserved):
-- Future tokens picked via probability distribution
-- Higher probability = higher chance of selection
-- Temperature scaling adjusts randomness in word selection.
-- Tuning temperature balances precision and creativity in generated text.
 
 ### Challenges in Text Generation
 
-#### Hallucinations
-- Generates plausible but incorrect information
-- Caused by missing or weak training signals
+| Challenge | Description | Causes | Risks | Mitigation |
+|------------|------------|--------|-------|------------|
+| **Hallucinations** | Model generates plausible but factually incorrect information | Weak or missing training signals, probabilistic next-token prediction | Misinformation, reduced trust, incorrect decisions | Better training data, retrieval grounding (RAG), human feedback, fact-checking layers |
+| **Bias** | Model reflects biases present in training data | Skewed datasets, historical or societal imbalances | Gender bias, Cultural bias, Racial bias, unfair outcomes | Bias-aware data curation, fairness evaluation, alignment tuning |
+| **Ethics** | Broader societal and legal concerns around model outputs | Scale of deployment, content generation capability | Misinformation, Plagiarism, Copyright violations, Fake news, Opinion manipulation | Strong ethical guidelines, safety alignment, policy enforcement, responsible AI governance |
 
-#### Bias
-- Models inherit biases from training data
-- Can reflect:
-  - Gender bias
-  - Cultural bias
-  - Racial bias
 
-#### Ethics
-- Risks include:
-  - Misinformation
-  - Plagiarism
-  - Copyright issues
-- Potential misuse:
-  - Fake news
-  - Opinion manipulation
-- Requires:
-  - Better data curation
-  - Bias mitigation
-  - Strong ethical guidelines
-
-## Multimodal and Generalist Models
+# Multimodal and Generalist Models
 
 ### Multimodal models
 
@@ -587,7 +477,5 @@ Its versatility represents a major shift from specialised AI systems towards sca
 - https://huggingface.co/docs/transformers/en/model_doc/bart
 
 ### Visualise Deep Learning Models
-
-```text
-https://projector.tensorflow.org/
-https://adamharley.com/nn_vis/cnn/3d.html
+- https://projector.tensorflow.org/
+- https://adamharley.com/nn_vis/cnn/3d.html
