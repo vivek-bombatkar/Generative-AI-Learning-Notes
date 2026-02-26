@@ -12,7 +12,10 @@
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
 - [AI Learning Techniques](#ai-learning-techniques)
 - [Reinforcement Learning for Generative AI](#Reinforcement-Learning-for-Generative-AI)
-- 
+- [Image Generation Models](#image-genegation) 
+-
+
+
 - [Useful Links](#useful-links)
 ---
 
@@ -712,10 +715,13 @@ Q-learning updates Q-values using:
 ### Links 
 
 
----
-# Useful Links
 
----
+# Image Generation Models
+
+![AI Learning Landscape – Complete Summary](images/AI%20Learning%20Landscape%20%E2%80%93%20Complete%20Summary.png)
+
+
+# Useful Links
 
 ## 🧠 Deep Learning Frameworks
 
