@@ -12,3 +12,14 @@ Feel free to click on each topic!
 - [30 RAG](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/30-RAG.md)
 - [40 Agents](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/40-Agents.md)
 - [50 LLM Building and fine-tuning](https://github.com/vivek-bombatkar/Generative-AI-Learning-Notes/blob/main/50-LLM-Building-fine-tuning.md)
+
+
+# AI Landscape
+
+  Learning Type   Examples
+  --------------- ----------------------------------
+  Supervised      Classification, Regression
+  Unsupervised    Clustering, Anomaly Detection
+  Reinforcement   Learn by doing
+  GenAI           LLM Pre‑Training & Post‑Training
+  Agents          Autonomous & AI Agents
