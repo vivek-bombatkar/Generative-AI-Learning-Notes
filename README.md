@@ -16,10 +16,23 @@ Feel free to click on each topic!
 
 # AI Landscape
 
-  Learning Type   Examples
-  --------------- ----------------------------------
-  Supervised      Classification, Regression
-  Unsupervised    Clustering, Anomaly Detection
-  Reinforcement   Learn by doing
-  GenAI           LLM Pre‑Training & Post‑Training
-  Agents          Autonomous & AI Agents
+| Learning Type  | Examples                              |
+|---------------|----------------------------------------|
+| Supervised     | Classification, Regression             |
+| Unsupervised   | Clustering, Anomaly Detection          |
+| Reinforcement  | Learn by doing                        |
+| GenAI          | LLM Pre-Training & Post-Training       |
+| Agents         | Autonomous & AI Agents                |
+
+
+# GenAI Core Applications
+
+| Category                    | Examples / Notes |
+|-----------------------------|------------------|
+| Multi-modal Creation        | txt2txt, img2img, txt2img, audio2txt, txt2video |
+| Machine Translation         | Automated language conversion |
+| Text Summarization          | Condensing long text into shorter form |
+| Deepfakes                   | Synthetic media generation |
+| Retrieval Augmented Generation (RAG) | Retrieval-enhanced LLM responses |
+| Agentic AI                  | Tool-using autonomous agents |
+| Vibe Coding                 | AI-assisted rapid prototyping |
