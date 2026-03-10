@@ -12,8 +12,9 @@
 - [Multimodal and Generalist Models](#multimodal-and-generalist-models)
 - [AI Learning Techniques](#ai-learning-techniques)
 - [Reinforcement Learning for Generative AI](#Reinforcement-Learning-for-Generative-AI)
-- [Image Generation Models](#image-genegation) 
--
+- [Image Generation Models](#Image-Generation-Models) 
+- [Diffusion Models in Generative AI](#Diffusion-Models-in-Generative-AI)
+
 
 
 - [Useful Links](#useful-links)
@@ -716,12 +717,42 @@ Q-learning updates Q-values using:
 
 
 
+
+
+---
 # Image Generation Models
 
 ![AI Learning Landscape – Complete Summary](images/AI%20Learning%20Landscape%20%E2%80%93%20Complete%20Summary.png)
 
 
-# Useful Links
+
+---
+# Diffusion Models in Generative AI
+
+## Forward Diffusion Process
+
+- In **Denoising Diffusion Models**, the **forward diffusion process** gradually corrupts a clean image by adding small amounts of **Gaussian noise** at each timestep.
+- The goal is to transform a clean image \(x_0\) into an image \(x_T\) that resembles **pure Gaussian noise**.
+
+## Diffusion Models vs Variational Autoencoders (VAE)
+
+Both **Diffusion Models** and **Variational Autoencoders (VAEs)** are generative models that map **random noise to structured outputs** such as images.  
+However, they handle the **introduction and reversal of noise** in very different ways.
+
+| Feature | Diffusion Model | VAE |
+|--------|--------|--------|
+| **Role of forward process** | Explicit and predefined by a diffusion schedule | Learned as part of the model via an encoder network |
+| **Noise mechanism** | Gaussian noise added progressively over fixed steps | Encoded into a probabilistic latent space |
+| **Reverse mechanism** | Trained denoising network reverses fixed noise steps | Decoder network reconstructs from latent space |
+| **Iterative reconstruction** | Yes, step-by-step denoising | No, one-shot reconstruction |
+
+
+
+
+
+
+
+# Other Useful Links
 
 ## 🧠 Deep Learning Frameworks
 
@@ -782,6 +813,6 @@ Q-learning updates Q-values using:
 ---
 
 
-### Visualise Deep Learning Models
+## Visualise Deep Learning Models
 - https://projector.tensorflow.org/
 - https://adamharley.com/nn_vis/cnn/3d.html
