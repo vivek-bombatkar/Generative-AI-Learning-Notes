@@ -746,6 +746,138 @@ However, they handle the **introduction and reversal of noise** in very differen
 | **Reverse mechanism** | Trained denoising network reverses fixed noise steps | Decoder network reconstructs from latent space |
 | **Iterative reconstruction** | Yes, step-by-step denoising | No, one-shot reconstruction |
 
+## Diffusion Model Process
+
+Diffusion models generate data using **two opposite phases**: adding noise and learning to remove it.
+
+**Forward Diffusion**
+- Gradually adds **Gaussian noise** to clean data.
+- Transforms **clean image → noisy image → pure noise**.
+
+**Reverse Diffusion**
+- Removes noise **step-by-step**.
+- A neural network learns to **predict the noise added at each step**.
+
+Process flow:
+- Clean data → gradual noise (forward diffusion)
+- Noise → step-by-step denoising (reverse diffusion)
+
+## U-Net and Noise Prediction
+
+The **U-Net architecture** is the core neural network used in the reverse diffusion process.
+
+### U-Net Architecture
+
+- Predicts the **noise added to each noised image**.
+- **DownBlocks**
+  - Reduce spatial resolution
+  - Increase feature channels
+- **UpBlocks**
+  - Increase spatial resolution
+  - Reduce feature channels
+- **Sinusoidal embeddings** encode the **noise timestep (noise rate)**.
+- The **noise schedule** strongly influences generation quality.
+
+
+## Real-World Applications
+
+- AI-generated **art and illustrations**
+- **Graphic and product design**
+- **Media and content creation**
+- **Data augmentation**
+
+## Key Concepts in Diffusion Models
+
+### Why Diffusion Models Are Popular
+- Diffusion models often generate **higher fidelity images** with **fewer artifacts** than GANs.
+- Training is generally **more stable** and **easier to tune**.
+- These advantages have made diffusion models widely used in **AI image generation**.
+
+---
+
+### Role of the Training Dataset
+- The model is trained on **real images** from a dataset.
+- During training:
+  - Noise is **gradually added** to the images.
+  - The model learns to **remove that noise**.
+- By learning the **statistical structure of the dataset**, the model can generate **new images from noise**.
+
+---
+
+### Generation Starts from Pure Noise
+- Image generation always begins with **random noise sampled from a standard Gaussian distribution**.
+- The model then **denoises the noise step-by-step** to produce a realistic image.
+- This ability to generate images **starting from noise** makes diffusion models **truly generative**.
+
+---
+
+### Residual Blocks in Diffusion Networks
+- **Residual blocks** introduce **identity shortcuts** in deep networks.
+- They help **gradients flow more easily** during training.
+- This reduces the **vanishing gradient problem** and enables **deeper networks to learn effectively**.
+
+---
+
+### Cosine Noise Schedule
+- The **cosine schedule** adds noise **slowly at the beginning**.
+- This preserves **image structure in early steps**.
+- Gradual noise introduction improves **learning efficiency and image quality**.
+
+
+The model learns to **remove noise in small increments**, gradually reconstructing a clean image.
+
+---
+
+### Diffusion Schedules
+The **diffusion schedule** determines **how much noise is added at each timestep**.
+
+Common schedules include:
+
+| Schedule | Description |
+|--------|--------|
+| Linear | Noise increases linearly across timesteps |
+| Cosine | Noise increases slowly at first, then faster |
+| Offset Cosine | Modified cosine schedule for improved stability |
+
+The schedule **strongly affects training stability and generation quality**.
+
+---
+
+### U-Net Skip Connections
+U-Net uses **skip connections** between early and later layers.
+
+Benefits:
+- Preserve **high-resolution spatial information**
+- Maintain **image structure and details**
+- Improve **accuracy of denoising**
+
+This is critical for **image generation tasks**.
+
+---
+
+### Number of Diffusion Steps
+The number of diffusion steps affects both **speed and image quality**.
+
+- **More steps**
+  - Better image quality
+  - Slower generation
+
+- **Fewer steps**
+  - Faster generation
+  - Risk of **blurry or low-quality images**
+
+A balance between **speed and quality** is required.
+
+---
+
+### Stable Diffusion
+**Stable Diffusion** is a practical implementation of diffusion models.
+
+Key characteristics:
+- Combines **text prompts with image generation**
+- Operates in **latent space instead of pixel space**
+- Enables **faster and more controllable image generation**
+- 
 
 
 
