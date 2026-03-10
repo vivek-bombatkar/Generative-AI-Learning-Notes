@@ -877,7 +877,14 @@ Key characteristics:
 - Combines **text prompts with image generation**
 - Operates in **latent space instead of pixel space**
 - Enables **faster and more controllable image generation**
-- 
+
+
+## Links:
+https://arxiv.org/abs/2303.01469
+https://arxiv.org/abs/1505.04597
+https://huggingface.co/blog/annotated-diffusion
+https://keras.io/examples/vision/oxford_pets_image_segmentation/
+https://imagen.research.google/
 
 
 
