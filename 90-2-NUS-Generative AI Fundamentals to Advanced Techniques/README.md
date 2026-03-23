@@ -14,6 +14,10 @@
 - [Reinforcement Learning for Generative AI](#Reinforcement-Learning-for-Generative-AI)
 - [Image Generation Models](#Image-Generation-Models) 
 - [Diffusion Models in Generative AI](#Diffusion-Models-in-Generative-AI)
+- [Diffusion Models in Generative AI](#Diffusion-Models-in-Generative-AI)
+- [Transformers for Computer Vision](#Transformers-for-Computer-Vision)
+
+
 
 
 
@@ -885,6 +889,11 @@ https://arxiv.org/abs/1505.04597
 https://huggingface.co/blog/annotated-diffusion
 https://keras.io/examples/vision/oxford_pets_image_segmentation/
 https://imagen.research.google/
+
+
+# Transformers for Computer Vision
+
+
 
 
 
